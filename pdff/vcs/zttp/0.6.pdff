@@ -1,0 +1,1158 @@
+{
+    "versions": {
+        "0.6": {
+            "\\": {
+                "constants": [],
+                "functions": [],
+                "traits": [],
+                "classes": [],
+                "interfaces": [],
+                "enums": []
+            },
+            "\\Zttp\\": {
+                "constants": [],
+                "functions": {
+                    "tap": {
+                        "name": "tap",
+                        "returntype": "one",
+                        "reference": false,
+                        "returntypehints": [],
+                        "parameters": [
+                            {
+                                "name": "$value",
+                                "rank": 0,
+                                "variadic": false,
+                                "reference": false,
+                                "default": "",
+                                "expression": false,
+                                "typehinttype": "one",
+                                "phpdoc": [],
+                                "typehints": [],
+                                "attributes": []
+                            },
+                            {
+                                "name": "$callback",
+                                "rank": 1,
+                                "variadic": false,
+                                "reference": false,
+                                "default": "",
+                                "expression": false,
+                                "typehinttype": "one",
+                                "phpdoc": [],
+                                "typehints": [],
+                                "attributes": []
+                            }
+                        ],
+                        "attributes": [],
+                        "phpdoc": []
+                    }
+                },
+                "traits": [],
+                "classes": {
+                    "zttp": {
+                        "name": "Zttp",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": [],
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__callstatic": {
+                                "name": "__callStatic",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$method",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$args",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    },
+                    "pendingzttprequest": {
+                        "name": "PendingZttpRequest",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": [],
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__construct": {
+                                "name": "__construct",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "new": {
+                                "name": "new",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$args",
+                                        "rank": 0,
+                                        "variadic": true,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": ""
+                                            }
+                                        ],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withoptions": {
+                                "name": "withOptions",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$options",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withoutredirecting": {
+                                "name": "withoutRedirecting",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withoutverifying": {
+                                "name": "withoutVerifying",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "asjson": {
+                                "name": "asJson",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "asformparams": {
+                                "name": "asFormParams",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "asmultipart": {
+                                "name": "asMultipart",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "bodyformat": {
+                                "name": "bodyFormat",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$format",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "contenttype": {
+                                "name": "contentType",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$contentType",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "accept": {
+                                "name": "accept",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$header",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withheaders": {
+                                "name": "withHeaders",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$headers",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withbasicauth": {
+                                "name": "withBasicAuth",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$username",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$password",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withdigestauth": {
+                                "name": "withDigestAuth",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$username",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$password",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "withcookies": {
+                                "name": "withCookies",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$cookies",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "timeout": {
+                                "name": "timeout",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$seconds",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "beforesending": {
+                                "name": "beforeSending",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$callback",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "get": {
+                                "name": "get",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$url",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$queryParams",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "post": {
+                                "name": "post",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$url",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$params",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "patch": {
+                                "name": "patch",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$url",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$params",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "put": {
+                                "name": "put",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$url",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$params",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "delete": {
+                                "name": "delete",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$url",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$params",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "send": {
+                                "name": "send",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$method",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$url",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$options",
+                                        "rank": 2,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "buildclient": {
+                                "name": "buildClient",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "buildhandlerstack": {
+                                "name": "buildHandlerStack",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "buildbeforesendinghandler": {
+                                "name": "buildBeforeSendingHandler",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "runbeforesendingcallbacks": {
+                                "name": "runBeforeSendingCallbacks",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$request",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$options",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "mergeoptions": {
+                                "name": "mergeOptions",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$options",
+                                        "rank": 0,
+                                        "variadic": true,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": ""
+                                            }
+                                        ],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "parsequeryparams": {
+                                "name": "parseQueryParams",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$url",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    },
+                    "zttprequest": {
+                        "name": "ZttpRequest",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": [],
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__construct": {
+                                "name": "__construct",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$request",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "url": {
+                                "name": "url",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "method": {
+                                "name": "method",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "body": {
+                                "name": "body",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "headers": {
+                                "name": "headers",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    },
+                    "zttpresponse": {
+                        "name": "ZttpResponse",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": [],
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__construct": {
+                                "name": "__construct",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$response",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "body": {
+                                "name": "body",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "json": {
+                                "name": "json",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "header": {
+                                "name": "header",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$header",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "headers": {
+                                "name": "headers",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "status": {
+                                "name": "status",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "effectiveuri": {
+                                "name": "effectiveUri",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "issuccess": {
+                                "name": "isSuccess",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "isok": {
+                                "name": "isOk",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "isredirect": {
+                                "name": "isRedirect",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "isclienterror": {
+                                "name": "isClientError",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "isservererror": {
+                                "name": "isServerError",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "cookies": {
+                                "name": "cookies",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__tostring": {
+                                "name": "__toString",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__call": {
+                                "name": "__call",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "parameters": [
+                                    {
+                                        "name": "$method",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$args",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "default": "",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        },
+                        "uses": [
+                            {
+                                "target": "\\illuminate\\support\\traits\\macroable"
+                            }
+                        ]
+                    },
+                    "connectionexception": {
+                        "name": "ConnectionException",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "\\exception",
+                        "constants": [],
+                        "properties": [],
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": []
+                    }
+                },
+                "interfaces": [],
+                "enums": []
+            }
+        }
+    }
+}
