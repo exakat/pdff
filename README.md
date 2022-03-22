@@ -35,14 +35,151 @@ The PDFF file has the following structure :
                  + `name`
                  + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
                  + `returntypehints` : array for fully qualified names of types
-                 + __parameters__ : array of parameters
+                 + __parameters__
+                 		+ `name`
+                 		+ `rank` : startign a index 0
+                 		+ `variadic`
+                 		+ `reference`
+                 		+ `default` 
+                 		+ `hasDefault` : boolean, meaning that this parameter has a default value or not. 
+                 		+ `expression` : is the default value a PHP expression (true) or a literal (false)
+                 		+ `typehinttype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+                 		+ __typehints__ : an array
+                 			+  `typehint` : the typehint's fully qualified name, or one of the PHP native types (string, never, callable...)
+                 		+ `attributes` : array of strings
+                 		+ `phpdoc` : array of strings
+
                  + `totalParameters` : count of all parameters (int)
                  + `optionalParameters` : count of optional parameters (int)
                  + `variadic` : is it a variadic function, which means one of the parameter is variadic
-                 + `attributes` : array of attributes
-                 + `phpdoc` : array fo phpdoc
-         + `classes` : array of classes
+                 + `attributes`
+                 	 + `attribute` : attribute's expression
+                 + `phpdoc` : array fo phpdoc strings
+         + `classes`
+         		+ __constants__
+         		   + __constant name__
+						   + `name`
+						   + `value`
+						   + `phpdoc`
+						   + `final`
+						   + `visibility` : one among 'private', 'public', 'protected', 'none'
+						   + `expression` : is the value a PHP expression (true) or a literal (false)                         
+						   + `attributes`
+						   	  + `attribute` : attribute's expression
+						   + `phpdoc` : array fo phpdoc strings
+				   + __methods__
+				       + `name`
+				       + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+				       + `returntypehints` : array for fully qualified names of types
+				       + __parameters__
+				       	 + `name`
+				       	 + `rank` : startign a index 0
+				       	 + + `visibility` : one among 'private', 'public', 'protected', 'none'
+				       	 + `variadic`
+				       	 + `static`
+				       	 + `reference`
+				       	 + `default` 
+				       	 + `hasDefault` : boolean, meaning that this parameter has a default value or not. 
+				       	 + `expression` : is the default value a PHP expression (true) or a literal (false)
+				       	 + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+				       	 + __returntypehints__ : an array
+				       	 		+  `typehint` : the typehint's fully qualified name, or one of the PHP native types (string, never, callable...)
+				       	 + `attributes` : array of strings
+				       	 + `phpdoc` : array of strings
+		       	 		 + `totalParameters` : count of all parameters (int)
+		       	 		 + `optionalParameters` : count of optional parameters (int)
+		       	 		 + `variadic` : is it a variadic function, which means one of the parameter is variadic
+		       	 		 + `attributes`
+		       	 		     + `attribute` : attribute's expression
+	       	 		   + `phpdoc` : array fo phpdoc strings 
+				   + __properties__
+				   	 + `name`
+				   	 + `var` : using the var keyword or not
+				   	 + `static`
+				   	 + `hasDefault`
+				   	 + `init` 
+				   	 + `expression`
+				   	 + `visibility` 
+				   	 + `typehinttype`
+				   	 + `attributes`
+				   	 		+ `attribute` : attribute's expression
+				   	 + `phpdoc` : array fo phpdoc strings 
          + `traits` : array of traits
+				   + __methods__
+				       + `name`
+				       + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+				       + `returntypehints` : array for fully qualified names of types
+				       + __parameters__
+				       	 + `name`
+				       	 + `rank` : startign a index 0
+				       	 + + `visibility` : one among 'private', 'public', 'protected', 'none'
+				       	 + `variadic`
+				       	 + `static`
+				       	 + `reference`
+				       	 + `default` 
+				       	 + `hasDefault` : boolean, meaning that this parameter has a default value or not. 
+				       	 + `expression` : is the default value a PHP expression (true) or a literal (false)
+				       	 + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+				       + __returntypehints__ : an array
+				       	 +  `typehint` : the typehint's fully qualified name, or one of the PHP native types (string, never, callable...)
+				       	 + `attributes` : array of strings
+				       	 + `phpdoc` : array of strings
+		       	 		 + `totalParameters` : count of all parameters (int)
+		       	 		 + `optionalParameters` : count of optional parameters (int)
+		       	 		 + `variadic` : is it a variadic function, which means one of the parameter is variadic
+		       	 		 + `attributes`
+		       	 		     + `attribute` : attribute's expression
+	       	 		   + `phpdoc` : array fo phpdoc string
+	       	 	 + __properties__
+	       	 	 	+ `name`
+	       	 	 	+ `var` : using the var keyword or not
+	       	 	 	+ `static`
+	       	 	 	+ `hasDefault`
+	       	 	 	+ `init` 
+	       	 	 	+ `expression`
+	       	 	 	+ `visibility` 
+	       	 	 	+ `typehinttype`
+	       	 	 	+ `attributes`
+	       	 	 		 + `attribute` : attribute's expression
+	       	 	 	+ `phpdoc` : array fo phpdoc strings
          + `interfaces` : array of interfaces
+         		+ __constants__
+         		   + __constant name__
+						   + `name`
+						   + `value`
+						   + `phpdoc`
+						   + `final`
+						   + `visibility` : one among 'private', 'public', 'protected', 'none'
+						   + `expression` : is the value a PHP expression (true) or a literal (false)                         
+						   + `attributes`
+						   	  + `attribute` : attribute's expression
+						   + `phpdoc` : array fo phpdoc strings
+				   + __methods__
+				       + `name`
+				       + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+				       + `returntypehints` : array for fully qualified names of types
+				       + __parameters__
+				       	 + `name`
+				       	 + `rank` : startign a index 0
+				       	 + `visibility` : one among 'private', 'public', 'protected', 'none'
+				       	 + `variadic`
+				       	 + `static`
+				       	 + `reference`
+				       	 + `default` 
+				       	 + `hasDefault` : boolean, meaning that this parameter has a default value or not. 
+				       	 + `expression` : is the default value a PHP expression (true) or a literal (false)
+				       	 + `returntype` : "one" for a single return type, including the absence of type; "or" for union type and "and" for intersectional types. 
+				       	 + __returntypehints__ : an array
+				       	 		+  `typehint` : the typehint's fully qualified name, or one of the PHP native types (string, never, callable...)
+				       	 + `attributes` : array of strings
+				       	 + `phpdoc` : array of strings
+		       	 		 + `totalParameters` : count of all parameters (int)
+		       	 		 + `optionalParameters` : count of optional parameters (int)
+		       	 		 + `variadic` : is it a variadic function, which means one of the parameter is variadic
+		       	 		 + `attributes`
+		       	 		     + `attribute` : attribute's expression
+	       	 		   + `phpdoc` : array fo phpdoc strings 
          + `enums` : array of enums
+         		+ __constants__
+         		+ __methods__
 
