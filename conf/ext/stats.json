@@ -1,0 +1,8 @@
+{
+"name":"stats",
+"prerequisite":[],
+"pecl": "stats",
+"homepage":"https://pecl.php.net/package/stats",
+"error":"",
+"phpVersion":"7.0-"
+}

@@ -1,0 +1,7 @@
+{
+"name":"gender",
+"prerequisite":[],
+"pecl": "gender",
+"homepage":"https://pecl.php.net/package/gender",
+"phpVersion":"8.0-"
+}

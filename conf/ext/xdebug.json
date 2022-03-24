@@ -1,0 +1,6 @@
+{
+"name":"xdebug",
+"prerequisite":[],
+"pecl": "xdebug",
+"homepage":"https://xdebug.org/"
+}

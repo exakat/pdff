@@ -1,0 +1,8 @@
+{
+"name":"dom",
+"prerequisite":[],
+"pecl": "",
+"homepage":"https://www.php.net/manual/en/book.dom.php",
+"error":"",
+"phpVersion":""
+}

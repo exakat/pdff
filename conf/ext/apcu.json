@@ -1,0 +1,6 @@
+{
+"name":"apcu",
+"prerequisite":[],
+"pecl": "apcu",
+"homepage":"https://pecl.php.net/package/apcu"
+}

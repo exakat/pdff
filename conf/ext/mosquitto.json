@@ -1,0 +1,8 @@
+{
+"name":"mosquitto",
+"prerequisite":["libmosquitto-dev"],
+"pecl": "mosquitto",
+"homepage":"https://github.com/mgdm/Mosquitto-PHP/",
+"error":"make: *** [Makefile:202: mosquitto.lo] Error 1",
+"phpVersion":""
+}

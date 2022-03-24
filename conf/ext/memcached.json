@@ -1,0 +1,6 @@
+{
+"name":"memcached",
+"prerequisite":["gcc make autoconf libc-dev pkg-config zlib1g-dev libmemcached-dev libmemcached-awesome"],
+"pecl": "memcached",
+"homepage":"https://github.com/php-memcached-dev/php-memcached"
+}

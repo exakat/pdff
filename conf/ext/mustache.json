@@ -1,0 +1,7 @@
+{
+"name":"mustache",
+"prerequisite":["libmustache-dev"],
+"pecl": "mustache",
+"homepage":"https://github.com/jbboehr/libmustache",
+"error":"Must install libmustache"
+}

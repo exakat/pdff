@@ -1,0 +1,6 @@
+{
+"name":"phar",
+"prerequisite":[],
+"pecl": "phar",
+"homepage":"https://www.php.net/phar"
+}

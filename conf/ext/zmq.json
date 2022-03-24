@@ -1,0 +1,7 @@
+{
+"name":"zmq",
+"prerequisite":[],
+"pecl": "zmq",
+"homepage":"https://pecl.php.net/package/zmq",
+"error":"Missing Constant definition in Reflection"
+}

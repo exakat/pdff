@@ -1,0 +1,9 @@
+{
+"name":"zip",
+"prerequisite":["libzip-dev"],
+"pecl": "zip",
+"homepage":"https://pecl.php.net/package/zip",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+}

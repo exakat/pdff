@@ -1,0 +1,8 @@
+{
+"name":"gd",
+"prerequisite":[],
+"pecl": "",
+"homepage":"https://www.php.net/manual/en/book.image.php",
+"error":"",
+"phpVersion":""
+}

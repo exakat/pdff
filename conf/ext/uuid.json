@@ -1,0 +1,8 @@
+{
+"name":"uuid",
+"prerequisite":["uuid-dev"],
+"pecl": "uuid",
+"homepage":"https://pecl.php.net/package/uuid",
+"error":"",
+"phpVersion":""
+}

@@ -1,0 +1,10 @@
+{
+"name":"trader",
+"prerequisite":[],
+"pecl": "trader",
+"homepage":"https://github.com/php/pecl-math-trader",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+
+}

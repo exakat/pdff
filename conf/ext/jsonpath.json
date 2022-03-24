@@ -1,0 +1,6 @@
+{
+"name":"jsonpath",
+"prerequisite":[],
+"pecl": "jsonpath",
+"homepage":"https://github.com/supermetrics-public/pecl-jsonpath"
+}

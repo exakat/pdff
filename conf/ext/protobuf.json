@@ -1,0 +1,6 @@
+{
+"name":"protobuf",
+"prerequisite":[],
+"pecl": "protobuf",
+"homepage":"https://github.com/allegro/php-protobuf"
+}

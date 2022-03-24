@@ -1,0 +1,9 @@
+{
+"name":"xmlrpc",
+"prerequisite":["libxml2-dev"],
+"pecl": "xmlrpc",
+"homepage":"https://pecl.php.net/package/xmlrpc",
+"error":"",
+"phpVersion":"7.4-",
+"peclVersion":"1.0.0RC3"
+}

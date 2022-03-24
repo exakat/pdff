@@ -1,0 +1,8 @@
+{
+"name":"zookeeper",
+"prerequisite":[],
+"pecl": "zookeeper",
+"homepage":"https://pecl.php.net/package/zookeeper",
+"error":"",
+"phpVersion":"7.2-"
+}

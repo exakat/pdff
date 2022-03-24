@@ -1,0 +1,6 @@
+{
+"name":"mailparse",
+"prerequisite":[],
+"pecl": "mailparse",
+"homepage":"https://pecl.php.net/package/mailparse"
+}

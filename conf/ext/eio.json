@@ -1,0 +1,9 @@
+{
+"name":"eio",
+"prerequisite":["libeio"],
+"pecl": "eio",
+"homepage":"https://github.com/rosmanov/pecl-eio",
+"error":"",
+"phpVersion":"8.0-",
+"peclVersion":""
+}

@@ -1,0 +1,7 @@
+{
+"name":"grpc",
+"prerequisite":[],
+"pecl": "grpc",
+"homepage":"http://grpc.io",
+"error":"fatal error: zlib.h: No such file or directory"
+}

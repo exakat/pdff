@@ -1,0 +1,6 @@
+{
+"name":"imagick",
+"prerequisite":["imagemagick", "libmagickwand-dev", "libmagickcore-dev"],
+"pecl": "imagick",
+"homepage":"https://phpimagick.com/"
+}

@@ -1,0 +1,7 @@
+{
+"name":"xdiff",
+"prerequisite":["libxdiff"],
+"pecl": "xdiff",
+"homepage":"https://pecl.php.net/package/xdiff",
+"error":"Needs installation for libxdiff (no apt-get available)"
+}

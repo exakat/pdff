@@ -1,0 +1,10 @@
+{
+"name":"tensor",
+"prerequisite":["libopenblas-dev", "liblapack3", "liblapacke-dev", "liblapack-dev", "gfortran"],
+"pecl": "tensor",
+"homepage":"https://github.com/RubixML/Tensor",
+"error":"",
+"phpVersion":"8.0",
+"peclVersion":""
+
+}

@@ -1,0 +1,7 @@
+{
+"name":"geoip",
+"prerequisite":[],
+"pecl": "geoip",
+"homepage":"https://pecl.php.net/package/apcu",
+"error":"Cannot locate geoip library"
+}

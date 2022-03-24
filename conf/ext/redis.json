@@ -1,0 +1,6 @@
+{
+"name":"redis",
+"prerequisite":[],
+"pecl": "redis",
+"homepage":"https://github.com/phpredis/phpredis/"
+}

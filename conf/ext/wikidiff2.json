@@ -1,0 +1,7 @@
+{
+"name":"wikidiff2",
+"prerequisite":[],
+"pecl": "wikidiff2",
+"homepage":"https://github.com/wikimedia/php-wikidiff2",
+"error":"No wikidiff2 in pecl"
+}

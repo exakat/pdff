@@ -1,0 +1,7 @@
+{
+"name":"imap",
+"prerequisite":[],
+"pecl": "imap",
+"homepage":"https://pecl.php.net/package/apcu",
+"error":"Cannot use pecl to install this library"
+}

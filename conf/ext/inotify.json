@@ -1,0 +1,6 @@
+{
+"name":"inotify",
+"prerequisite":[],
+"pecl": "inotify",
+"homepage":"https://github.com/arnaud-lb/php-inotify"
+}

@@ -1,0 +1,8 @@
+{
+"name":"sdl",
+"prerequisite":["libsdl2-2.0"],
+"pecl": "sdl-beta",
+"homepage":"https://github.com/Ponup/php-sdl",
+"error":"configure: error: Cannot find sdl2-config",
+"phpVersion":"8.0+"
+}

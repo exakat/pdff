@@ -1,0 +1,6 @@
+{
+"name":"gearman",
+"prerequisite":["gearman-job-server", "libgearman-dev"],
+"pecl": "gearman",
+"homepage":"https://pecl.php.net/package/gearman"
+}

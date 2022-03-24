@@ -1,0 +1,6 @@
+{
+"name":"mongodb",
+"prerequisite":[],
+"pecl": "mongodb",
+"homepage":"https://docs.mongodb.com/drivers/php/"
+}

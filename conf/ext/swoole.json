@@ -1,0 +1,7 @@
+{
+"name":"swoole",
+"prerequisite":[],
+"pecl": "swoole",
+"homepage":"https://github.com/swoole/swoole-src",
+"error":"Missing Constant definition in Reflection"
+}

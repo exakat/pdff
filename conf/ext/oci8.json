@@ -1,0 +1,7 @@
+{
+"name":"oci8",
+"prerequisite":[],
+"pecl": "oci8",
+"homepage":"https://pecl.php.net/package/oci8",
+"error":"needs to automate compilation"
+}

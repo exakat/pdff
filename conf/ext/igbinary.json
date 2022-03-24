@@ -1,0 +1,6 @@
+{
+"name":"igbinary",
+"prerequisite":[],
+"pecl": "igbinary",
+"homepage":"https://github.com/igbinary/igbinary/"
+}

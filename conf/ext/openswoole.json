@@ -1,0 +1,7 @@
+{
+"name":"openswoole",
+"prerequisite":[],
+"pecl": "openswoole",
+"homepage":"https://www.swoole.co.uk",
+"error":"Missing Constant definition in Reflection"
+}

@@ -1,0 +1,6 @@
+{
+"name":"psr",
+"prerequisite":[],
+"pecl": "psr",
+"homepage":"https://github.com/jbboehr/php-psr"
+}

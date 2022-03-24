@@ -1,0 +1,8 @@
+{
+"name":"bitset",
+"prerequisite":[],
+"pecl": "bitset",
+"homepage":"https://github.com/php/pecl-numbers-bitset",
+"error":"",
+"phpVersion":""
+}

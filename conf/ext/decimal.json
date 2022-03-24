@@ -1,0 +1,8 @@
+{
+"name":"decimal",
+"prerequisite":["libmpdec-dev"],
+"pecl": "decimal",
+"homepage":"https://pecl.php.net/package/decimal",
+"error":"",
+"phpVersion":""
+}

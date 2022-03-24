@@ -1,0 +1,7 @@
+{
+"name":"xxtea",
+"prerequisite":[],
+"pecl": "xxtea",
+"homepage":"https://pecl.php.net/package/xxtea",
+"phpVersion":"8.0-"
+}
