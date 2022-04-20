@@ -1,0 +1,9 @@
+{
+"name":"opencensus",
+"prerequisite":[],
+"pecl": "opencensus",
+"peclVersion": "alpha",
+"homepage":"https://github.com/census-instrumentation/opencensus-php",
+"error":"",
+"phpVersion":""
+}

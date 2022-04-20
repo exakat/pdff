@@ -1,0 +1,9 @@
+{
+"name":"phalcon",
+"prerequisite":[],
+"pecl": "phalcon",
+"peclVersion": "",
+"homepage":"https://phalcon.io/en-us",
+"error":"",
+"phpVersion":""
+}

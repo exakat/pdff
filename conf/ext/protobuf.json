@@ -2,5 +2,6 @@
 "name":"protobuf",
 "prerequisite":[],
 "pecl": "protobuf",
+"peclVersion":"3.19.0",
 "homepage":"https://github.com/allegro/php-protobuf"
 }
