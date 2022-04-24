@@ -1,0 +1,1796 @@
+{
+    "versions": {
+        "3.0.0": {
+            "\\": {
+                "name": "\\",
+                "constants": [],
+                "functions": {
+                    "app": {
+                        "name": "app",
+                        "returntype": "one",
+                        "reference": false,
+                        "returntypehints": [],
+                        "parameters": [],
+                        "totalParameters": 0,
+                        "optionalParameters": 0,
+                        "variadic": false,
+                        "attributes": [],
+                        "phpdoc": [
+                            {
+                                "phpdoc": "\/**\n     * Return the Leaf instance\n     *\n     * @return Leaf\\App\n     *\/"
+                            }
+                        ]
+                    },
+                    "_env": {
+                        "name": "_env",
+                        "returntype": "one",
+                        "reference": false,
+                        "returntypehints": [],
+                        "parameters": [
+                            {
+                                "name": "$key",
+                                "rank": 0,
+                                "variadic": false,
+                                "reference": false,
+                                "hasDefault": false,
+                                "default": "",
+                                "expression": false,
+                                "typehinttype": "one",
+                                "phpdoc": [],
+                                "typehints": [],
+                                "attributes": []
+                            },
+                            {
+                                "name": "$default",
+                                "rank": 1,
+                                "variadic": false,
+                                "reference": false,
+                                "hasDefault": true,
+                                "default": "null",
+                                "expression": false,
+                                "typehinttype": "one",
+                                "phpdoc": [],
+                                "typehints": [],
+                                "attributes": []
+                            }
+                        ],
+                        "totalParameters": 2,
+                        "optionalParameters": 1,
+                        "variadic": false,
+                        "attributes": [],
+                        "phpdoc": [
+                            {
+                                "phpdoc": "\/**\n     * Gets the value of an environment variable.\n     *\n     * @param  string  $key\n     * @param  mixed  $default\n     * @return mixed\n     *\/"
+                            }
+                        ]
+                    }
+                },
+                "traits": [],
+                "classes": [],
+                "interfaces": [],
+                "enums": []
+            },
+            "\\leaf\\": {
+                "name": "\\Leaf\\",
+                "constants": [],
+                "functions": [],
+                "traits": [],
+                "classes": {
+                    "app": {
+                        "name": "App",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "\\leaf\\router",
+                        "constants": [],
+                        "properties": {
+                            "$container": {
+                                "name": "$container",
+                                "visibility": "protected",
+                                "init": "",
+                                "static": false,
+                                "readonly": false,
+                                "hasDefault": false,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [
+                                    {
+                                        "phpdoc": "\/**\n     * Leaf container instance\n     * @var \\Leaf\\Helpers\\Container\n     *\/"
+                                    }
+                                ],
+                                "attributes": []
+                            },
+                            "$errorHandler": {
+                                "name": "$errorHandler",
+                                "visibility": "protected",
+                                "init": "",
+                                "static": false,
+                                "readonly": false,
+                                "hasDefault": false,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [
+                                    {
+                                        "phpdoc": "\/**\n     * Callable to be invoked on application error\n     *\/"
+                                    }
+                                ],
+                                "attributes": []
+                            }
+                        },
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__construct": {
+                                "name": "__construct",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$userSettings",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": "\\array"
+                                            }
+                                        ],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "setuperrorhandler": {
+                                "name": "setupErrorHandler",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "seterrorhandler": {
+                                "name": "setErrorHandler",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$handler",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$wrapper",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "true",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": "\\bool"
+                                            }
+                                        ],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "register": {
+                                "name": "register",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "loadviewengines": {
+                                "name": "loadViewEngines",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "setupdefaultcontainer": {
+                                "name": "setupDefaultContainer",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__get": {
+                                "name": "__get",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__set": {
+                                "name": "__set",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__isset": {
+                                "name": "__isset",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__unset": {
+                                "name": "__unset",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "config": {
+                                "name": "config",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "null",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "logger": {
+                                "name": "logger",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "headers": {
+                                "name": "headers",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "request": {
+                                "name": "request",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "response": {
+                                "name": "response",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "script": {
+                                "name": "script",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$mode",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$callback",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "root": {
+                                "name": "root",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "cleanbuffer": {
+                                "name": "cleanBuffer",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "halt": {
+                                "name": "halt",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$status",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$message",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "''",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "cors": {
+                                "name": "cors",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$options",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    },
+                    "config": {
+                        "name": "Config",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": {
+                            "$settings": {
+                                "name": "$settings",
+                                "visibility": "protected",
+                                "init": "",
+                                "static": true,
+                                "readonly": false,
+                                "hasDefault": true,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [],
+                                "attributes": []
+                            }
+                        },
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "set": {
+                                "name": "set",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$item",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "null",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "mapconfig": {
+                                "name": "mapConfig",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$item",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": "\\string"
+                                            }
+                                        ],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "null",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "get": {
+                                "name": "get",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$item",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "null",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    },
+                    "view": {
+                        "name": "View",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": {
+                            "$engines": {
+                                "name": "$engines",
+                                "visibility": "public",
+                                "init": "",
+                                "static": true,
+                                "readonly": false,
+                                "hasDefault": true,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [],
+                                "attributes": []
+                            }
+                        },
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "attach": {
+                                "name": "attach",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$className",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$name",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "null",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "getdiindex": {
+                                "name": "getDiIndex",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$class",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__callstatic": {
+                                "name": "__callstatic",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$name",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$arguments",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": true,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    },
+                    "middleware": {
+                        "name": "Middleware",
+                        "abstract": true,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": {
+                            "$app": {
+                                "name": "$app",
+                                "visibility": "protected",
+                                "init": "",
+                                "static": false,
+                                "readonly": false,
+                                "hasDefault": false,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [
+                                    {
+                                        "phpdoc": "\/**\n     * @var \\Leaf\\App Reference to the primary application instance\n     *\/"
+                                    }
+                                ],
+                                "attributes": []
+                            },
+                            "$next": {
+                                "name": "$next",
+                                "visibility": "protected",
+                                "init": "",
+                                "static": false,
+                                "readonly": false,
+                                "hasDefault": false,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [
+                                    {
+                                        "phpdoc": "\/**\n     * @var mixed Reference to the next downstream middleware\n     *\/"
+                                    }
+                                ],
+                                "attributes": []
+                            }
+                        },
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "setnextmiddleware": {
+                                "name": "setNextMiddleware",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$nextMiddleware",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": true,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "getnextmiddleware": {
+                                "name": "getNextMiddleware",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": true,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "next": {
+                                "name": "next",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": true,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "call": {
+                                "name": "call",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    }
+                },
+                "interfaces": [],
+                "enums": []
+            },
+            "\\leaf\\helpers\\": {
+                "name": "\\Leaf\\Helpers\\",
+                "constants": [],
+                "functions": [],
+                "traits": [],
+                "classes": {
+                    "container": {
+                        "name": "Container",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "",
+                        "constants": [],
+                        "properties": {
+                            "$data": {
+                                "name": "$data",
+                                "visibility": "protected",
+                                "init": "",
+                                "static": false,
+                                "readonly": false,
+                                "hasDefault": true,
+                                "expression": false,
+                                "typehinttype": "one",
+                                "typehints": [],
+                                "phpdoc": [
+                                    {
+                                        "phpdoc": "\/**\n     * Key-value array of arbitrary data\n     * @var array\n     *\/"
+                                    }
+                                ],
+                                "attributes": []
+                            }
+                        },
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__construct": {
+                                "name": "__construct",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$items",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "[ ]",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "normalizekey": {
+                                "name": "normalizeKey",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "set": {
+                                "name": "set",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "get": {
+                                "name": "get",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$default",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": "null",
+                                        "expression": false,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "replace": {
+                                "name": "replace",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$items",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "contentjson": {
+                                "name": "contentJson",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "contenthtml": {
+                                "name": "contentHtml",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "all": {
+                                "name": "all",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "keys": {
+                                "name": "keys",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "has": {
+                                "name": "has",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "remove": {
+                                "name": "remove",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__get": {
+                                "name": "__get",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__set": {
+                                "name": "__set",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__isset": {
+                                "name": "__isset",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "__unset": {
+                                "name": "__unset",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "clear": {
+                                "name": "clear",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "offsetexists": {
+                                "name": "offsetExists",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$offset",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "offsetget": {
+                                "name": "offsetGet",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$offset",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "offsetset": {
+                                "name": "offsetSet",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$offset",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "offsetunset": {
+                                "name": "offsetUnset",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$offset",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "count": {
+                                "name": "count",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "getiterator": {
+                                "name": "getIterator",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": [
+                                    {
+                                        "typehint": "\\arrayiterator"
+                                    }
+                                ]
+                            },
+                            "singleton": {
+                                "name": "singleton",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$key",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$value",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "protect": {
+                                "name": "protect",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$callable",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": "\\closure"
+                                            }
+                                        ],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            }
+                        }
+                    }
+                },
+                "interfaces": [],
+                "enums": []
+            }
+        }
+    }
+}
