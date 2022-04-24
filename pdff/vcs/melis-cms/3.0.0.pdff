@@ -1,6 +1,6 @@
 {
     "versions": {
-        "2.4.0": {
+        "3.0.0": {
             "\\": {
                 "name": "\\",
                 "constants": [],
@@ -243,8 +243,8 @@
                         "implements": [],
                         "phpdoc": [],
                         "methods": {
-                            "indexsiteaction": {
-                                "name": "indexsiteAction",
+                            "indexaction": {
+                                "name": "indexAction",
                                 "phpdoc": [],
                                 "attributes": [],
                                 "visibility": [],
@@ -649,7 +649,26 @@
                         "abstract": false,
                         "final": false,
                         "extends": "\\meliscore\\form\\factory\\melisselectfactory",
-                        "constants": [],
+                        "constants": {
+                            "SITE": {
+                                "name": "SITE",
+                                "value": "'SITE'",
+                                "expression": false,
+                                "final": false,
+                                "visibility": "",
+                                "phpdoc": [],
+                                "attributes": []
+                            },
+                            "NEW_SITE": {
+                                "name": "NEW_SITE",
+                                "value": "''",
+                                "expression": false,
+                                "final": false,
+                                "visibility": "",
+                                "phpdoc": [],
+                                "attributes": []
+                            }
+                        },
                         "properties": [],
                         "traits": [],
                         "attributes": [],
@@ -688,6 +707,56 @@
                                 "reference": false,
                                 "returntype": "one",
                                 "returntypehints": []
+                            },
+                            "getcorrespondingsiteid": {
+                                "name": "getCorrespondingSiteId",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$sl",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [
+                                            {
+                                                "typehint": "\\zend\\servicemanager\\servicelocatorinterface"
+                                            }
+                                        ],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$pageId",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": [
+                                    {
+                                        "typehint": "\\int"
+                                    }
+                                ]
                             }
                         }
                     },
@@ -1230,6 +1299,48 @@
                                 ],
                                 "totalParameters": 5,
                                 "optionalParameters": 5,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "setpluginwidthxmlattribute": {
+                                "name": "setPluginWidthXmlAttribute",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$pluginXml",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    },
+                                    {
+                                        "name": "$pluginSettings",
+                                        "rank": 1,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 2,
+                                "optionalParameters": 2,
                                 "variadic": false,
                                 "final": false,
                                 "static": false,
@@ -2852,90 +2963,6 @@
                                 "returntype": "one",
                                 "returntypehints": []
                             },
-                            "getpageidinitial": {
-                                "name": "getPageIdInitial",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$pageId",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            },
-                            "removeelementvalue": {
-                                "name": "removeElementValue",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$pageChldren",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    },
-                                    {
-                                        "name": "$data",
-                                        "rank": 1,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": "[ ]",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    },
-                                    {
-                                        "name": "$data2",
-                                        "rank": 2,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": "[ ]",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 3,
-                                "optionalParameters": 3,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            },
                             "checkpagerelation": {
                                 "name": "checkPageRelation",
                                 "phpdoc": [],
@@ -2984,6 +3011,35 @@
                                 ],
                                 "totalParameters": 3,
                                 "optionalParameters": 3,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "getpageidinitial": {
+                                "name": "getPageIdInitial",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$pageId",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
                                 "variadic": false,
                                 "final": false,
                                 "static": false,
@@ -3045,6 +3101,21 @@
                                 "reference": false,
                                 "returntype": "one",
                                 "returntypehints": []
+                            },
+                            "rectestaction": {
+                                "name": "recTestAction",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
                             }
                         }
                     },
@@ -3078,35 +3149,6 @@
                                 "parameters": [],
                                 "totalParameters": 0,
                                 "optionalParameters": 0,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            },
-                            "hasaccess": {
-                                "name": "hasAccess",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$key",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
                                 "variadic": false,
                                 "final": false,
                                 "static": false,
@@ -3382,68 +3424,24 @@
                             }
                         }
                     },
-                    "dashboardcontroller": {
-                        "name": "DashboardController",
-                        "abstract": false,
-                        "final": false,
-                        "extends": "\\zend\\mvc\\controller\\abstractactioncontroller",
-                        "constants": [],
-                        "properties": [],
-                        "traits": [],
-                        "attributes": [],
-                        "implements": [],
-                        "phpdoc": [],
-                        "methods": {
-                            "renderdashboardpagesindicatorsaction": {
-                                "name": "renderDashboardPagesIndicatorsAction",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [],
-                                "totalParameters": 0,
-                                "optionalParameters": 0,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            },
-                            "getdashboarddataaction": {
-                                "name": "getDashboardDataAction",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [],
-                                "totalParameters": 0,
-                                "optionalParameters": 0,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            }
-                        }
-                    },
                     "toolstylecontroller": {
                         "name": "ToolStyleController",
                         "abstract": false,
                         "final": false,
                         "extends": "\\zend\\mvc\\controller\\abstractactioncontroller",
                         "constants": {
-                            "TOOL_KEY": {
-                                "name": "TOOL_KEY",
-                                "value": "'meliscms_tool_styles'",
+                            "TOOL_TEMPLATES_CONFIG_PATH": {
+                                "name": "TOOL_TEMPLATES_CONFIG_PATH",
+                                "value": "'meliscms\/tools\/meliscms_tool_styles'",
                                 "expression": false,
                                 "final": false,
                                 "visibility": "",
                                 "phpdoc": [],
                                 "attributes": []
                             },
-                            "TOOL_TEMPLATES_CONFIG_PATH": {
-                                "name": "TOOL_TEMPLATES_CONFIG_PATH",
-                                "value": "'meliscms\/tools\/meliscms_tool_styles'",
+                            "TOOL_KEY": {
+                                "name": "TOOL_KEY",
+                                "value": "'meliscms_tool_styles'",
                                 "expression": false,
                                 "final": false,
                                 "visibility": "",
@@ -3763,35 +3761,6 @@
                                 "parameters": [
                                     {
                                         "name": "$pageId",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            },
-                            "hasaccess": {
-                                "name": "hasAccess",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$key",
                                         "rank": 0,
                                         "variadic": false,
                                         "reference": false,
@@ -4200,25 +4169,8 @@
                                 "visibility": [],
                                 "parameters": [
                                     {
-                                        "name": "$modules",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [
-                                            {
-                                                "typehint": "\\array"
-                                            }
-                                        ],
-                                        "attributes": []
-                                    },
-                                    {
                                         "name": "$template",
-                                        "rank": 1,
+                                        "rank": 0,
                                         "variadic": false,
                                         "reference": false,
                                         "hasDefault": true,
@@ -4234,8 +4186,8 @@
                                         "attributes": []
                                     }
                                 ],
-                                "totalParameters": 2,
-                                "optionalParameters": 2,
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
                                 "variadic": false,
                                 "final": false,
                                 "static": false,
@@ -4246,6 +4198,35 @@
                                         "typehint": "\\bool"
                                     }
                                 ]
+                            },
+                            "modulenametoviewname": {
+                                "name": "moduleNameToViewName",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [
+                                    {
+                                        "name": "$string",
+                                        "rank": 0,
+                                        "variadic": false,
+                                        "reference": false,
+                                        "hasDefault": true,
+                                        "default": " ",
+                                        "expression": true,
+                                        "typehinttype": "one",
+                                        "phpdoc": [],
+                                        "typehints": [],
+                                        "attributes": []
+                                    }
+                                ],
+                                "totalParameters": 1,
+                                "optionalParameters": 1,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
                             },
                             "getsitemodules": {
                                 "name": "getSiteModules",
@@ -4368,35 +4349,6 @@
                                 "parameters": [],
                                 "totalParameters": 0,
                                 "optionalParameters": 0,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
-                            },
-                            "hasaccess": {
-                                "name": "hasAccess",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$key",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
                                 "variadic": false,
                                 "final": false,
                                 "static": false,
@@ -5178,35 +5130,6 @@
                                         "typehint": "\\zend\\view\\model\\jsonmodel"
                                     }
                                 ]
-                            },
-                            "hasaccess": {
-                                "name": "hasAccess",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$key",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
                             }
                         }
                     },
@@ -5216,9 +5139,9 @@
                         "final": false,
                         "extends": "\\zend\\mvc\\controller\\abstractactioncontroller",
                         "constants": {
-                            "INTERFACE_KEY": {
-                                "name": "INTERFACE_KEY",
-                                "value": "'meliscms_tool_language'",
+                            "TOOL_INDEX": {
+                                "name": "TOOL_INDEX",
+                                "value": "'meliscms'",
                                 "expression": false,
                                 "final": false,
                                 "visibility": "",
@@ -5234,9 +5157,9 @@
                                 "phpdoc": [],
                                 "attributes": []
                             },
-                            "TOOL_INDEX": {
-                                "name": "TOOL_INDEX",
-                                "value": "'meliscms'",
+                            "INTERFACE_KEY": {
+                                "name": "INTERFACE_KEY",
+                                "value": "'meliscms_tool_language'",
                                 "expression": false,
                                 "final": false,
                                 "visibility": "",
@@ -5627,35 +5550,6 @@
                                         "typehint": "\\zend\\view\\model\\jsonmodel"
                                     }
                                 ]
-                            },
-                            "hasaccess": {
-                                "name": "hasAccess",
-                                "phpdoc": [],
-                                "attributes": [],
-                                "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$key",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
-                                "variadic": false,
-                                "final": false,
-                                "static": false,
-                                "reference": false,
-                                "returntype": "one",
-                                "returntypehints": []
                             }
                         }
                     },
@@ -6004,7 +5898,17 @@
                         "abstract": false,
                         "final": false,
                         "extends": "\\zend\\mvc\\controller\\abstractactioncontroller",
-                        "constants": [],
+                        "constants": {
+                            "NEW_PAGE": {
+                                "name": "NEW_PAGE",
+                                "value": "'0'",
+                                "expression": false,
+                                "final": false,
+                                "visibility": "",
+                                "phpdoc": [],
+                                "attributes": []
+                            }
+                        },
                         "properties": [],
                         "traits": [],
                         "attributes": [],
@@ -6875,9 +6779,9 @@
                         "final": false,
                         "extends": "\\zend\\mvc\\controller\\abstractactioncontroller",
                         "constants": {
-                            "DOMAIN_TABLE_PREFIX": {
-                                "name": "DOMAIN_TABLE_PREFIX",
-                                "value": "'sdom_'",
+                            "TOOL_INDEX": {
+                                "name": "TOOL_INDEX",
+                                "value": "'meliscms'",
                                 "expression": false,
                                 "final": false,
                                 "visibility": "",
@@ -6893,9 +6797,9 @@
                                 "phpdoc": [],
                                 "attributes": []
                             },
-                            "TOOL_INDEX": {
-                                "name": "TOOL_INDEX",
-                                "value": "'meliscms'",
+                            "DOMAIN_TABLE_PREFIX": {
+                                "name": "DOMAIN_TABLE_PREFIX",
+                                "value": "'sdom_'",
                                 "expression": false,
                                 "final": false,
                                 "visibility": "",
@@ -7191,34 +7095,24 @@
                                 "returntype": "one",
                                 "returntypehints": []
                             },
-                            "hasaccess": {
-                                "name": "hasAccess",
+                            "rendertoolsitecontentactionminifyassetsaction": {
+                                "name": "renderToolSiteContentActionMinifyAssetsAction",
                                 "phpdoc": [],
                                 "attributes": [],
                                 "visibility": [],
-                                "parameters": [
-                                    {
-                                        "name": "$key",
-                                        "rank": 0,
-                                        "variadic": false,
-                                        "reference": false,
-                                        "hasDefault": true,
-                                        "default": " ",
-                                        "expression": true,
-                                        "typehinttype": "one",
-                                        "phpdoc": [],
-                                        "typehints": [],
-                                        "attributes": []
-                                    }
-                                ],
-                                "totalParameters": 1,
-                                "optionalParameters": 1,
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
                                 "variadic": false,
                                 "final": false,
                                 "static": false,
                                 "reference": false,
                                 "returntype": "one",
-                                "returntypehints": []
+                                "returntypehints": [
+                                    {
+                                        "typehint": "\\zend\\view\\model\\viewmodel"
+                                    }
+                                ]
                             },
                             "getsitedataaction": {
                                 "name": "getSiteDataAction",
@@ -7370,6 +7264,79 @@
                             },
                             "deletesitedomainplatformaction": {
                                 "name": "deleteSiteDomainPlatformAction",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "regeneratemodulespath": {
+                                "name": "regenerateModulesPath",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": [
+                                    {
+                                        "typehint": "\\bool"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                },
+                "interfaces": [],
+                "enums": []
+            },
+            "\\meliscms\\controller\\dashboardplugins\\": {
+                "name": "\\MelisCms\\Controller\\DashboardPlugins\\",
+                "constants": [],
+                "functions": [],
+                "traits": [],
+                "classes": {
+                    "meliscmspagesindicatorsplugin": {
+                        "name": "MelisCmsPagesIndicatorsPlugin",
+                        "abstract": false,
+                        "final": false,
+                        "extends": "\\meliscore\\controller\\dashboardplugins\\meliscoredashboardtemplatingplugin",
+                        "constants": [],
+                        "properties": [],
+                        "traits": [],
+                        "attributes": [],
+                        "implements": [],
+                        "phpdoc": [],
+                        "methods": {
+                            "__construct": {
+                                "name": "__construct",
+                                "phpdoc": [],
+                                "attributes": [],
+                                "visibility": [],
+                                "parameters": [],
+                                "totalParameters": 0,
+                                "optionalParameters": 0,
+                                "variadic": false,
+                                "final": false,
+                                "static": false,
+                                "reference": false,
+                                "returntype": "one",
+                                "returntypehints": []
+                            },
+                            "pageindicators": {
+                                "name": "pageIndicators",
                                 "phpdoc": [],
                                 "attributes": [],
                                 "visibility": [],
@@ -8039,10 +8006,10 @@
                         "attributes": [],
                         "implements": [
                             {
-                                "target": "\\meliscore\\service\\meliscorerightsserviceinterface"
+                                "target": "\\zend\\servicemanager\\servicelocatorawareinterface"
                             },
                             {
-                                "target": "\\zend\\servicemanager\\servicelocatorawareinterface"
+                                "target": "\\meliscore\\service\\meliscorerightsserviceinterface"
                             }
                         ],
                         "phpdoc": [],
