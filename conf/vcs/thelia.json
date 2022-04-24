@@ -1,11 +1,14 @@
 {
     "handle": "https:\/\/github.com\/thelia\/thelia.git",
     "versions": {
+        "2.5.0": "2.5.0-alpha2",
         "2.4.0": "2.4.4",
         "2.3.0": "2.3.5",
         "2.2.0": "2.2.6",
         "2.1.0": "2.1.11",
         "2.0.0": "2.0.12"
     },
-    "ignored_dirs": []
+    "ignored_dirs": [],
+    "ignored_versions": [],
+    "tags": []
 }
