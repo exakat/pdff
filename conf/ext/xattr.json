@@ -1,0 +1,6 @@
+{
+"name":"xattr",
+"prerequisite":[],
+"pecl": "xattr",
+"homepage":"https://github.com/php/pecl-file_system-xattr"
+}

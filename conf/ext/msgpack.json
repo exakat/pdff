@@ -1,0 +1,6 @@
+{
+"name":"msgpack",
+"prerequisite":[],
+"pecl": "msgpack",
+"homepage":"https://github.com/msgpack/msgpack-php"
+}
