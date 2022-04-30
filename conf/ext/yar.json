@@ -1,0 +1,9 @@
+{
+"name":"yar",
+"prerequisite":["libcurl4-openssl-dev"],
+"pecl": "yar",
+"peclVersion": "",
+"homepage":"https://github.com/laruence/yar",
+"error":"",
+"phpVersion":""
+}

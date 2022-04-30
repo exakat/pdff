@@ -1,0 +1,9 @@
+{
+"name":"amqp",
+"prerequisite":["librabbitmq-dev"],
+"pecl": "amqp",
+"peclVersion": "",
+"homepage":"https://github.com/php-amqp/php-amqp",
+"error":"",
+"phpVersion":""
+}
