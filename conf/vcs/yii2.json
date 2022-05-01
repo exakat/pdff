@@ -1,8 +1,10 @@
 {
     "handle": "https:\/\/www.github.com\/yiisoft\/yii2",
+    "vcs": "git",
+    "name": "yii2",
     "versions": {
-        "3.0.0": "3.0.0-alpha1",
-        "2.0.0": "2.0.45"
+        "3.0": "3.0.0-alpha1",
+        "2.0": "2.0.45"
     },
     "ignored_dirs": [],
     "ignored_versions": [],
