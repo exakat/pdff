@@ -1,0 +1,7 @@
+{
+"name":"svm",
+"prerequisite":["libsvm-dev"],
+"pecl": "svm",
+"homepage":"https://github.com/ianbarber/php-svm",
+"peclVersion": "0.2.3"
+}
