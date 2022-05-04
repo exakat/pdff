@@ -1,0 +1,9 @@
+{
+"name":"pcov",
+"prerequisite":[],
+"pecl": "pcov",
+"homepage":"https://github.com/krakjoe/pcov",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+}
