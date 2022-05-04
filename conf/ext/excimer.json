@@ -1,0 +1,6 @@
+{
+"name":"excimer",
+"prerequisite":[],
+"pecl": "excimer",
+"homepage":"https://www.mediawiki.org/wiki/Excimer"
+}
