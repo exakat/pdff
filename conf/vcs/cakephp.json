@@ -1,7 +1,7 @@
 {
     "handle": "https:\/\/github.com\/cakephp\/cakephp.git",
-    "vcs": "git",
-    "name": "cakephp",
+    "vcs": "gitbb",
+    "name": "CakePHP",
     "versions": {
         "4.4": "4.4.0-RC1",
         "4.3": "4.3.8",

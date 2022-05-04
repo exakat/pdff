@@ -9,9 +9,9 @@ There is some early results here, more will come as time permits.
 ## Content
 
 The PDFF folder contains 3 sub-folders : 
-+ ext : PHP extensions, extracted from pecl and the standard distribution, compiled on Debian. 
-+ vcs : PHP packages, when available as a single repository. For example, concrete5, or slim PHP.
-+ packagist : some PHP packages, listed from packagist.org, with the same naming scheme.
++ [ext](ext.md) : PHP extensions, extracted from pecl and the standard distribution, compiled on Debian. 
++ [frameworks](vcs.md) : PHP packages, when available as a single repository. For example, concrete5, or slim PHP.
++ [packagist](packagist.md) : some PHP packages, listed from packagist.org, with the same naming scheme. Not all, because there are too many. 
 
 Only major and middle versions are provided currently. So, vcs/cakephp/4.3.0.pdff represents the last availble 4.3.* version. 
 
@@ -181,4 +181,11 @@ The PDFF file has the following structure :
          + `enums` : array of enums
                  + __constants__
                  + __methods__
+
+
+Know limitations
+----------------
+
++ PDFF do not support conditional structures. In other words, it is not possible to have two definitions for the same FQN. 
++ PDFF do not support dynamic configurations, such as class_alias()
 

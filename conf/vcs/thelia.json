@@ -1,7 +1,7 @@
 {
     "handle": "https:\/\/github.com\/thelia\/thelia.git",
     "vcs": "git",
-    "name": "thelia",
+    "name": "Thelia",
     "versions": {
         "2.5": "2.5.0-alpha2",
         "2.4": "2.4.4",

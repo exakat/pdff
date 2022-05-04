@@ -1,7 +1,7 @@
 {
     "handle": "https:\/\/github.com\/leafsphp\/leaf.git",
     "vcs": "git",
-    "name": "leaf",
+    "name": "Leaf",
     "versions": {
         "3.0": "v3.0-preview",
         "2.6": "v2.6.0",

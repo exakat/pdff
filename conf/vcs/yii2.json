@@ -1,7 +1,7 @@
 {
     "handle": "https:\/\/www.github.com\/yiisoft\/yii2",
     "vcs": "git",
-    "name": "yii2",
+    "name": "Yii",
     "versions": {
         "3.0": "3.0.0-alpha1",
         "2.0": "2.0.45"
