@@ -1,0 +1,9 @@
+{
+"name":"varnish",
+"prerequisite":["libvarnishapi-dev"],
+"pecl": "varnish",
+"homepage":"https://github.com/php/pecl-caching-varnish",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+}

@@ -1,0 +1,9 @@
+{
+"name":"lzf",
+"prerequisite":[],
+"pecl": "lzf",
+"homepage":"https://github.com/php/pecl-file_formats-lzf",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+}

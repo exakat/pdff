@@ -1,5 +1,5 @@
 {
-"name":"amqp",
+"name":"AMQP",
 "prerequisite":["librabbitmq-dev"],
 "pecl": "amqp",
 "peclVersion": "",
