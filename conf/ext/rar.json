@@ -1,0 +1,9 @@
+{
+"name":"rar",
+"prerequisite":[],
+"pecl": "rar",
+"homepage":"https://github.com/cataphract/php-rar",
+"error":"rar : no install yet for rar.so",
+"phpVersion":"",
+"peclVersion":""
+}

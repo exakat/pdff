@@ -1,0 +1,9 @@
+{
+"name":"dbus",
+"prerequisite":["libdbus-1-dev", "libxml2-dev"],
+"pecl": "dbus",
+"peclVersion": "beta",
+"homepage":"https://github.com/derickr/pecl-dbus",
+"error":"make: *** [Makefile:192: dbus.lo] Error 1; ERROR: `make' failed",
+"phpVersion":""
+}
