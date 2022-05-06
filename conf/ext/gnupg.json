@@ -3,5 +3,5 @@
 "prerequisite":[],
 "pecl": "gnupg",
 "homepage":"http://grpc.io",
-"error":"error":"ERROR: `/tmp/pear/temp/gnupg/configure --with-php-config=/usr/local/bin/php-config' failed"
+"error":"ERROR: `/tmp/pear/temp/gnupg/configure --with-php-config=/usr/local/bin/php-config' failed"
 }
