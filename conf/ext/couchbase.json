@@ -1,0 +1,9 @@
+{
+"name":"couchbase",
+"prerequisite":["cmake", "gcc", "openssl"],
+"pecl": "couchbase",
+"homepage":"https://github.com/couchbase/php-couchbase",
+"error":"cmake error",
+"phpVersion":"8.0-",
+"peclVersion":""
+}
