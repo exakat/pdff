@@ -1,0 +1,9 @@
+{
+"name":"yaf",
+"prerequisite":[],
+"pecl": "yaf",
+"peclVersion": "",
+"homepage":"https://github.com/laruence/yaf",
+"error":"",
+"phpVersion":""
+}
