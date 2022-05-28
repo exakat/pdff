@@ -1,0 +1,9 @@
+{
+"name":"xhprof",
+"prerequisite":[],
+"pecl": "xhprof",
+"peclVersion": "",
+"homepage":"https://github.com/longxinH/xhprof",
+"error":"",
+"phpVersion":""
+}
