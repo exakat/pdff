@@ -1,0 +1,9 @@
+{
+"name":"yaconf",
+"prerequisite":[],
+"pecl": "yaconf",
+"peclVersion": "",
+"homepage":"https://github.com/laruence/yaconf",
+"error":"",
+"phpVersion":""
+}
