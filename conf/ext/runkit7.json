@@ -1,0 +1,9 @@
+{
+"name":"runkit7",
+"prerequisite":[],
+"pecl": "runkit7",
+"peclVersion": "4.0.0a3",
+"homepage":"https://github.com/runkit7/runkit7",
+"error":"",
+"phpVersion":""
+}
