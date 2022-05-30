@@ -1,0 +1,9 @@
+{
+"name":"parallel",
+"prerequisite":[],
+"pecl": "parallel",
+"homepage":"https://github.com/krakjoe/parallel",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+}
