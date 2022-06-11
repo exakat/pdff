@@ -1,15 +1,15 @@
 {
-    "handle": "git@github.com:concrete5\/concrete5.git",
+    "handle": "https:\/\/www.github.com\/concrete5\/concrete5.git",
     "vcs": "git",
     "name": "concrete5",
     "versions": {
+        "9.1": "9.1.1",
         "9.0": "9.0.2",
         "8.5": "8.5.7",
         "8.4": "8.4.5",
         "8.3": "8.3.2",
         "8.2": "8.2.1",
-        "8.1": "8.1.0",
-        "8.0": "8.0.3"
+        "8.1": "8.1.0"
     },
     "ignored_dirs": [],
     "ignored_versions": [],
