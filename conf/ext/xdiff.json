@@ -1,7 +1,8 @@
 {
 "name":"xdiff",
-"prerequisite":["libxdiff"],
+"prerequisite":[],
 "pecl": "xdiff",
 "homepage":"https://pecl.php.net/package/xdiff",
-"error":"Needs installation for libxdiff (no apt-get available)"
+"error":"",
+"shell":"curl -O http://www.xmailserver.org/libxdiff-0.23.tar.gz\ntar -xzf libxdiff-0.23.tar.gz\ncd libxdiff-0.23/\n./configure --build=aarch64-unknown-linux-gnu\nmake\nmake install"
 }
