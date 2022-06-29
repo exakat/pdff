@@ -1,0 +1,9 @@
+{
+"name":"stomp",
+"prerequisite":["libssl-dev"],
+"pecl": "Stomp",
+"peclVersion": "",
+"homepage":"https://github.com/php/pecl-tools-stomp",
+"error":"",
+"phpVersion":""
+}
