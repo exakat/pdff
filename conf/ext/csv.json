@@ -1,0 +1,9 @@
+{
+"name":"csv",
+"prerequisite":[],
+"pecl": "csv",
+"peclVersion": "0.4.2",
+"homepage":"https://gitlab.com/Girgias/csv-php-extension",
+"error":"",
+"phpVersion":""
+}
