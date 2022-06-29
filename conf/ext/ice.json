@@ -1,0 +1,9 @@
+{
+"name":"ICE",
+"prerequisite":[],
+"pecl": "ice",
+"peclVersion": "",
+"homepage":"https://github.com/ice/framework",
+"error":"",
+"phpVersion":""
+}
