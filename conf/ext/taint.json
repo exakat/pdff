@@ -1,0 +1,8 @@
+{
+"name":"taint",
+"prerequisite":[],
+"pecl": "taint",
+"homepage":"https://github.com/laruence/taint",
+"error":"",
+"phpVersion":"8.0-"
+}
