@@ -5,5 +5,5 @@
 "homepage":"https://github.com/rosmanov/pecl-eio",
 "error":"",
 "phpVersion":"8.0-",
-"peclVersion":""
+"peclVersion":"3.0.0RC4"
 }
