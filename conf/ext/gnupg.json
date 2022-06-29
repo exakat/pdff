@@ -1,7 +1,8 @@
 {
 "name":"gnupg",
-"prerequisite":[],
+"prerequisite":[" libgpgme-dev"],
 "pecl": "gnupg",
 "homepage":"http://grpc.io",
-"error":"ERROR: `/tmp/pear/temp/gnupg/configure --with-php-config=/usr/local/bin/php-config' failed"
+"error":"",
+"peclVersion":""
 }
