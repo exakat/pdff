@@ -1,8 +1,9 @@
 {
 "name":"zookeeper",
-"prerequisite":[],
+"prerequisite":["libzookeeper-mt-dev"],
 "pecl": "zookeeper",
+"peclVersion":"1.0.0",
 "homepage":"https://pecl.php.net/package/zookeeper",
 "error":"",
-"phpVersion":"7.2-"
+"phpVersion":""
 }
