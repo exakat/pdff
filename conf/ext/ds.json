@@ -1,0 +1,9 @@
+{
+"name":"ds",
+"prerequisite":[],
+"pecl": "ds",
+"homepage":"https://pecl.php.net/package/ds",
+"error":"",
+"phpVersion":"8.0-",
+"peclVersion":""
+}

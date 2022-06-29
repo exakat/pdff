@@ -1,0 +1,9 @@
+{
+"name":"phtreads",
+"prerequisite":[],
+"pecl": "phtreads",
+"peclVersion": "3.1.6",
+"homepage":"https://github.com/krakjoe/pthreads",
+"error":"\"pecl/pthreads\" is deprecated in favor of \"channel:///parallel\"",
+"phpVersion":""
+}
