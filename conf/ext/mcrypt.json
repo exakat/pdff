@@ -1,0 +1,9 @@
+{
+"name":"mcrypt",
+"prerequisite":["libmcrypt-dev"],
+"pecl": "mcrypt",
+"homepage":"https://pecl.php.net/package/mailparse",
+"peclVersion":"",
+"error":"",
+"phpVersion":"8.0-"
+}
