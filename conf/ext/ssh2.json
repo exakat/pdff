@@ -1,0 +1,9 @@
+{
+"name":"ssh2",
+"prerequisite":["libssh2-1", "libssh2-1-dev"],
+"pecl": "ssh2",
+"homepage":"https://github.com/php/pecl-networking-ssh2",
+"error":"",
+"phpVersion":"8.0-",
+"peclVersion":"1.3.1"
+}
