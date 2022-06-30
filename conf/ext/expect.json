@@ -1,0 +1,9 @@
+{
+"name":"expect",
+"prerequisite":["libexpect", "tcl-dev"],
+"pecl": "expect",
+"peclVersion": "",
+"homepage":"https://github.com/sibaz/pecl-expect",
+"error":" #include <tcl.h> missing",
+"phpVersion":""
+}

@@ -1,0 +1,9 @@
+{
+"name":"parle",
+"prerequisite":[],
+"pecl": "parle",
+"peclVersion": "0.8.3",
+"homepage":"https://github.com/weltling/parle",
+"error":"make: *** [Makefile:192: parle.lo] Error 1",
+"phpVersion":""
+}

@@ -1,0 +1,9 @@
+{
+"name":"php_trie",
+"prerequisite":[],
+"pecl": "php_trie",
+"homepage":"https://github.com/ace411/php-trie-ext",
+"error":"/tmp/pear/temp/tmpv2K8NV/php_trie-0.1.1/LICENSE does not exist",
+"phpVersion":"",
+"peclVersion":""
+}

@@ -1,0 +1,9 @@
+{
+"name":"pecl_http",
+"prerequisite":[],
+"pecl": "pecl_http",
+"peclVersion": "",
+"homepage":"https://github.com/m6w6/ext-http",
+"error":"You should add \"extension=raphf.so\" to php.ini",
+"phpVersion":""
+}

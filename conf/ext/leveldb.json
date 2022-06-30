@@ -1,0 +1,10 @@
+{
+"name":"leveldb",
+"prerequisite":["libleveldb-dev"],
+"pecl": "leveldb",
+"homepage":"https://github.com/reeze/php-leveldb",
+"error":"",
+"phpVersion":"",
+"peclVersion":"0.3.0"
+
+}

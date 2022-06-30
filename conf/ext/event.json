@@ -1,0 +1,9 @@
+{
+"name":"event",
+"prerequisite":["libssl-dev", "libevent-dev"],
+"pecl": "event",
+"peclVersion": "",
+"homepage":"https://bitbucket.org/osmanov/pecl-event/src/master/",
+"error":"",
+"phpVersion":""
+}

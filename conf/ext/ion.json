@@ -1,0 +1,9 @@
+{
+"name":"ion",
+"prerequisite":[],
+"pecl": "ion",
+"peclVersion": "0.2.0",
+"homepage":"https://github.com/awesomized/ext-ion",
+"error":"make error",
+"phpVersion":""
+}

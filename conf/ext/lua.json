@@ -3,7 +3,7 @@
 "prerequisite":["lua50"],
 "pecl": "lua",
 "homepage":"https://pecl.php.net/package/lua",
-"error":"configure: error: Please reinstall the lua distribution - lua.h should be in <lua-dir>/include/",
+"error":"",
 "phpVersion":"",
 "peclVersion":""
 }
