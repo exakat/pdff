@@ -1,0 +1,9 @@
+{
+"name":"AST",
+"prerequisite":[],
+"pecl": "ast",
+"peclVersion": "",
+"homepage":"https://github.com/nikic/php-ast",
+"error":"",
+"phpVersion":""
+}
