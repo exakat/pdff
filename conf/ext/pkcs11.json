@@ -1,0 +1,6 @@
+{
+"name":"pkcs11",
+"prerequisite":[],
+"pecl": "pkcs11",
+"homepage":"https://github.com/gamringer/php-pkcs11/"
+}
