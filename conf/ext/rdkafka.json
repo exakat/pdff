@@ -1,0 +1,10 @@
+{
+"name":"rdkafka",
+"prerequisite":["librdkafka-dev"],
+"pecl": "rdkafka",
+"homepage":"https://github.com/phpredis/phpredis/",
+"error":"",
+"phpVersion":"",
+"peclVersion":""
+
+}
