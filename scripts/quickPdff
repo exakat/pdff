@@ -1,0 +1,238 @@
+<?php declare(strict_types=1);
+
+use ast\flags;
+use Exakat\Reports\Helpers\PdffClass;
+use Exakat\Reports\Helpers\PdffTrait;
+use Exakat\Reports\Helpers\PdffInterface;
+use Exakat\Reports\Helpers\PdffExtends;
+use Exakat\Reports\Helpers\PdffPhpdoc;
+use Exakat\Reports\Helpers\PdffAttribute;
+use Exakat\Reports\Helpers\PdffConstant;
+
+include 'scripts/Pdff.php';
+
+const AST_DUMP_LINENOS = 1;
+const AST_DUMP_EXCLUDE_DOC_COMMENT = 2;
+
+$b = hrtime(true);
+$code = file_get_contents('test.php');
+//$code = file_get_contents('scripts/Pdff.php');
+
+//var_dump(ast\parse_code($code, $version=90));
+//echo ast_dump(ast\parse_code($code, $version=70)), "\n";
+
+$ast = ast\parse_code($code, $version=90);
+$pdff = new Exakat\Reports\Helpers\Pdff();
+$version = $pdff->setVersion();
+$version->setNamespace('\\');
+
+toPdff($ast, $pdff);
+
+print json_encode($pdff->toArray(), JSON_PRETTY_PRINT);
+$e = hrtime(true);
+
+print PHP_EOL.number_format(($e - $b) / 1000000, 2)." ms\n";
+
+function toPdff($ast, $pdff) {
+	switch($ast->kind) {
+		case ast\AST_STMT_LIST:
+			foreach($ast->children as $child) {
+				toPdff($child, $pdff);
+			}
+			break;
+
+		case ast\AST_CONST_DECL:
+			toPdffConst($ast, $pdff);
+			break;
+
+		case ast\AST_CLASS:
+			switch(true) {
+				case $ast->flags & ast\flags\CLASS_INTERFACE:
+					toPdffInterface($ast, $pdff);
+					break;
+
+				case $ast->flags & ast\flags\CLASS_TRAIT:
+					toPdffTrait($ast, $pdff);
+					break;
+
+				default:
+					toPdffClass($ast, $pdff);
+			}
+			break;
+
+		case ast\AST_DECLARE:
+		case ast\AST_NAMESPACE: // @todo
+			// continue;
+			break;
+			
+		default:
+			print "No processing for ".ast\get_kind_name($ast->kind).PHP_EOL;
+			die();
+	}
+}
+
+function toPdffClass($ast, $pdff) {
+	$version = $pdff->getVersion();
+	$ns = $version->getNamespace();
+	
+	$theClass = new PdffClass($ast->children['name'],
+							 (bool) ($ast->flags & ast\flags\MODIFIER_ABSTRACT),
+							 (bool) ($ast->flags & ast\flags\MODIFIER_FINAL),
+							 false, //this is $readonly,
+							 getName($ast->children['extends'])
+							 );
+							 
+	addImplements ($theClass, $ast->children['implements']->children);
+	addDoccomments($theClass, $ast->children['docComment']);
+	addAttributes($theClass,  $ast->children['attributes']);
+
+	$ns->addClass($ast->children['name'], $theClass);
+}
+
+function toPdffConst($ast, $pdff) {
+	$version = $pdff->getVersion();
+	$ns = $version->getNamespace();
+	
+	foreach($ast->children as $const) {
+    	$theConstant = new PdffConstant($const->children['name'],
+        	                            (string) $const->children['value'],
+            	                        false
+                	                    );    
+
+		addDoccomments($theConstant, $const->children['docComment']);
+
+	    $ns->addConstant($const->children['name'], $theConstant);
+	}
+}
+
+function toPdffInterface($ast, $pdff) {
+	$version = $pdff->getVersion();
+	$ns = $version->getNamespace();
+	
+	$theInterface = new PdffInterface($ast->children['name'],
+									  getName($ast->children['extends'])
+									  );
+
+	$ns->addInterface($ast->children['name'], $theInterface);
+}
+
+function toPdffTrait($ast, $pdff) {
+	$version = $pdff->getVersion();
+	$ns = $version->getNamespace();
+	
+	$theTrait = new PdffTrait($ast->children['name'],
+								  getName($ast->children['extends'])
+								  );
+
+	addDoccomments($theTrait, $ast->children['docComment']);
+
+	$ns->addTrait($ast->children['name'], $theTrait);
+}
+function addImplements($theClass, $implements) {
+	foreach($implements as $implement) {
+		$theImplement = new PdffExtends(getName($implement));
+
+        $theClass->addImplements($theImplement, array()); // @todo add support for local aliases
+	}
+}
+
+function addDoccomments($theClass, $doccomments) {
+	if (empty($doccomments)) { return; }
+
+	$thePhpdoc = new PdffPhpdoc($doccomments);
+
+    $theClass->addPhpdoc($thePhpdoc);
+}
+
+function addAttributes($theClass, $attributes) {
+	if (empty($attributes->children)) { return; }
+
+	foreach($attributes->children as $attribute) {
+		// @todo : build the attribute with arguments and sub expressions
+		$theAttribute = new PdffAttribute(getName($attribute->children[0]->children['class']));
+
+    	$theClass->addAttribute($theAttribute);
+	}
+}
+
+function getName($node) {
+	return $node->children['name'] ?? '';
+}
+
+function get_flag_info() : array {
+    static $info;
+    if ($info !== null) {
+        return $info;
+    }
+
+    foreach (ast\get_metadata() as $data) {
+        if (empty($data->flags)) {
+            continue;
+        }
+
+        $flagMap = [];
+        foreach ($data->flags as $fullName) {
+            $shortName = substr($fullName, strrpos($fullName, '\\') + 1);
+            $flagMap[constant($fullName)] = $shortName;
+        }
+
+        $info[(int) $data->flagsCombinable][$data->kind] = $flagMap;
+    }
+
+    return $info;
+}
+
+function format_flags(int $kind, int $flags) : string {
+    list($exclusive, $combinable) = get_flag_info();
+    if (isset($exclusive[$kind])) {
+        $flagInfo = $exclusive[$kind];
+        if (isset($flagInfo[$flags])) {
+            return "{$flagInfo[$flags]} ($flags)";
+        }
+    } else if (isset($combinable[$kind])) {
+        $flagInfo = $combinable[$kind];
+        $names = [];
+        foreach ($flagInfo as $flag => $name) {
+            if ($flags & $flag) {
+                $names[] = $name;
+            }
+        }
+        if (!empty($names)) {
+            return implode(" | ", $names) . " ($flags)";
+        }
+    }
+    return (string) $flags;
+}
+
+/** Dumps abstract syntax tree */
+function ast_dump($ast, int $options = 0) : string {
+    if ($ast instanceof ast\Node) {
+        $result = ast\get_kind_name($ast->kind);
+
+        if ($options & AST_DUMP_LINENOS) {
+            $result .= " @ $ast->lineno";
+            if (isset($ast->endLineno)) {
+                $result .= "-$ast->endLineno";
+            }
+        }
+
+        if (ast\kind_uses_flags($ast->kind) || $ast->flags != 0) {
+            $result .= "\n    flags: " . format_flags($ast->kind, $ast->flags);
+        }
+        foreach ($ast->children as $i => $child) {
+            if (($options & AST_DUMP_EXCLUDE_DOC_COMMENT) && $i === 'docComment') {
+                continue;
+            }
+            $result .= "\n    $i: " . str_replace("\n", "\n    ", ast_dump($child, $options));
+        }
+        return $result;
+    } else if ($ast === null) {
+        return 'null';
+    } else if (is_string($ast)) {
+        return "\"$ast\"";
+    } else {
+        return (string) $ast;
+    }
+}
+
+?>
