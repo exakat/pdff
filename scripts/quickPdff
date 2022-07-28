@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 
 use ast\flags;
+use Exakat\Reports\Helpers\Pdff;
 use Exakat\Reports\Helpers\PdffClass;
 use Exakat\Reports\Helpers\PdffTrait;
 use Exakat\Reports\Helpers\PdffInterface;
@@ -20,401 +21,558 @@ include 'scripts/Pdff.php';
 const AST_DUMP_LINENOS = 1;
 const AST_DUMP_EXCLUDE_DOC_COMMENT = 2;
 
-const TYPES = [
-ast\flags\TYPE_ARRAY		=> '\array',
-ast\flags\TYPE_CALLABLE		=> '\callable',
-ast\flags\TYPE_VOID		 	=> '\void',
-ast\flags\TYPE_BOOL		 	=> '\bool',
-ast\flags\TYPE_LONG			=> '\int',
-ast\flags\TYPE_DOUBLE		=> '\float',
-ast\flags\TYPE_STRING		=> '\string',
-ast\flags\TYPE_ITERABLE		=> '\iterable',
-ast\flags\TYPE_OBJECT		=> '\object',
-ast\flags\TYPE_NULL		 	=> '\null',
-ast\flags\TYPE_FALSE		=> '\true',
-ast\flags\TYPE_STATIC		=> '\static',
-ast\flags\TYPE_MIXED		=> '\mixed',
-ast\flags\TYPE_NEVER  		=> '\never',
-];
+const TYPES = array(
+	ast\flags\TYPE_ARRAY		=> '\array',
+	ast\flags\TYPE_CALLABLE		=> '\callable',
+	ast\flags\TYPE_VOID		 	=> '\void',
+	ast\flags\TYPE_BOOL		 	=> '\bool',
+	ast\flags\TYPE_LONG			=> '\int',
+	ast\flags\TYPE_DOUBLE		=> '\float',
+	ast\flags\TYPE_STRING		=> '\string',
+	ast\flags\TYPE_ITERABLE		=> '\iterable',
+	ast\flags\TYPE_OBJECT		=> '\object',
+	ast\flags\TYPE_NULL		 	=> '\null',
+	ast\flags\TYPE_FALSE		=> '\true',
+	ast\flags\TYPE_STATIC		=> '\static',
+	ast\flags\TYPE_MIXED		=> '\mixed',
+	ast\flags\TYPE_NEVER  		=> '\never',
+);
 
-$b = hrtime(true);
-$code = file_get_contents('test.php');
-//$code = file_get_contents('scripts/Pdff.php');
+$files = shell_exec('find ../analyzeG3/projects/wordflex_flex/code/ | grep .php$');
+$files = explode("\n", trim($files));
+$files = array_slice($files, 0, 123);
 
-//var_dump(ast\parse_code($code, $version=90));
-//echo ast_dump(ast\parse_code($code, $version=70)), "\n";
+$files = array('test.php');
 
-$ast = ast\parse_code($code, $version=90);
-$pdff = new Exakat\Reports\Helpers\Pdff();
-$version = $pdff->setVersion();
-$version->setNamespace('\\');
+foreach($files as $file) {
+	$b = hrtime(true);
+	print $file.PHP_EOL;
+	$code = file_get_contents($file);
 
-print get_class($version).PHP_EOL;
-toPdff($ast, $version);
+	$ast = ast\parse_code($code, $version=90);
+	
+	$code = new Code($ast);
+	$pdff = $code->toPdff();
 
-print json_encode($pdff->toArray(), JSON_PRETTY_PRINT);
-$e = hrtime(true);
+	print json_encode($pdff->toArray(), JSON_PRETTY_PRINT);
 
-print PHP_EOL.number_format(($e - $b) / 1000000, 2)." ms\n";
-
-function toPdff($ast, $pdff) {
-	$ns = $pdff->getNamespace();
-
-	switch($ast->kind) {
-		case ast\AST_STMT_LIST:
-			foreach($ast->children as $child) {
-				toPdff($child, $pdff);
-			}
-			break;
-
-		case ast\AST_CONST_DECL:
-			toPdffConst($ast, $ns);
-			break;
-
-		case ast\AST_FUNC_DECL:
-			toPdffFunction($ast, $ns);
-			break;
-
-		case ast\AST_CLASS:
-			switch(true) {
-				case $ast->flags & ast\flags\CLASS_INTERFACE:
-					toPdffInterface($ast, $ns);
-					break;
-
-				case $ast->flags & ast\flags\CLASS_TRAIT:
-					toPdffTrait($ast, $ns);
-					break;
-
-				default:
-					toPdffClass($ast, $ns);
-			}
-			break;
-
-		case ast\AST_NAMESPACE: // @todo
-			$ns = $pdff->setNamespace('\\'.$ast->children['name']);
-			break;
-
-		case ast\AST_DECLARE:
-			// continue;
-			break;
-			
-		default:
-			print "No processing for ".ast\get_kind_name($ast->kind).PHP_EOL;
-			die();
-	}
+	$e = hrtime(true);
+	print $file." : ".number_format(($e - $b) / 1000000, 2)." ms\n";
 }
 
-function toPdffClass($ast, $pdff) {
-	$theClass = new PdffClass($ast->children['name'],
-							 (bool) ($ast->flags & ast\flags\MODIFIER_ABSTRACT),
-							 (bool) ($ast->flags & ast\flags\MODIFIER_FINAL),
-							 false, //this is $readonly,
-							 getName($ast->children['extends'])
-							 );
+class Code {
 
-	foreach($ast->children['stmts']->children as $cm) {
-		switch ($cm->kind) {
-			case ast\AST_METHOD:
-				toPdffMethod($cm, $theClass);
-				break;
 
-			case ast\AST_PROP_GROUP:
-				foreach($cm->children['props']->children as $property) {
-					toPdffProperty($property, $theClass, $cm->flags, $cm->children['type']);
+const BINARY_OP = array(
+	ast\flags\BINARY_BITWISE_OR			=> '|',
+	ast\flags\BINARY_BITWISE_AND		=> '&',
+	ast\flags\BINARY_BITWISE_XOR		=> '^',
+	ast\flags\BINARY_CONCAT				=> '.',
+	ast\flags\BINARY_ADD				=> '+',
+	ast\flags\BINARY_SUB				=> '-',
+	ast\flags\BINARY_MUL				=> '*',
+	ast\flags\BINARY_DIV				=> '/',
+	ast\flags\BINARY_MOD				=> '%',
+	ast\flags\BINARY_POW				=> '**',
+	ast\flags\BINARY_SHIFT_LEFT			=> '<<',
+	ast\flags\BINARY_SHIFT_RIGHT		=> '>>',
+	ast\flags\BINARY_COALESCE			=> '??',
+);
+
+const MAGIC_CONSTANTS = array(
+ast\flags\MAGIC_LINE 		=> '__LINE__',
+ast\flags\MAGIC_FILE 		=> '__FILE__',
+ast\flags\MAGIC_DIR 		=> '__DIR__',
+ast\flags\MAGIC_NAMESPACE 	=> '__NAMESPACE__',
+ast\flags\MAGIC_FUNCTION	=> '__FUNCTION__',
+ast\flags\MAGIC_METHOD 		=> '__METHOD__',
+ast\flags\MAGIC_CLASS 		=> '__CLASS__',
+ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
+);
+
+	private $ast;
+	private $pdff;
+	private array $uses;
+	
+	public function __construct($ast) {
+		$this->ast = $ast;
+
+		$this->pdff = new Pdff();
+		$version = $this->pdff->setVersion();
+		$version->setNamespace('\\');
+	}
+
+	public function toPdff($ast = null, $pdff = null) {
+		if ($ast === null) {
+			$ast = $this->ast;
+		}
+		if ($pdff === null) {
+			$pdff = $this->pdff;
+			$version = $pdff->getVersion();
+			$pdff = $version;
+		}
+
+		$ns = $pdff->getNamespace();
+	
+		switch($ast->kind) {
+			case ast\AST_STMT_LIST:
+				foreach($ast->children as $child) {
+					$this->toPdff($child, $pdff);
 				}
 				break;
-
-			case ast\AST_CLASS_CONST_GROUP:
-				foreach($cm->children['const']->children as $const) {
-					toPdffClassConst($const, $theClass, $cm->flags);
+	
+			case ast\AST_CONST_DECL:
+				$this->toPdffConst($ast, $ns);
+				break;
+	
+			case ast\AST_FUNC_DECL:
+				$this->toPdffFunction($ast, $ns);
+				break;
+	
+			case ast\AST_CLASS:
+				switch(true) {
+					case $ast->flags & ast\flags\CLASS_INTERFACE:
+						$this->toPdffInterface($ast, $ns);
+						break;
+	
+					case $ast->flags & ast\flags\CLASS_TRAIT:
+						$this->toPdffTrait($ast, $ns);
+						break;
+	
+					default:
+						$this->toPdffClass($ast, $ns);
 				}
 				break;
-
-			case ast\AST_USE_TRAIT:
-				foreach($cm->children['traits']->children as $usetrait) {
-					toPdffUseTrait($usetrait, $theClass);
+	
+			case ast\AST_NAMESPACE: // @todo
+				$ns = $pdff->setNamespace('\\'.$ast->children['name']);
+				break;
+	
+			case ast\AST_USE:
+				foreach($ast->children as $use) {
+					$this->uses[$use->children['alias']] = $use->children['name'];
 				}
 				break;
-
-			default:
-				print "New structure in Class : ".ast\get_kind_name($cm->kind);
+	
+			case ast\AST_DECLARE:
+			case ast\AST_INCLUDE_OR_EVAL:
+			case ast\AST_CALL;
+			case ast\AST_IF;
+				// continue;
 				break;
 				
+			default:
+				print "No processing for ".ast\get_kind_name($ast->kind).PHP_EOL;
+				die();
+		}
+		
+		return $this->pdff;
+	}
+
+	private function toPdffClass($ast, $pdff) {
+		$theClass = new PdffClass($ast->children['name'],
+								 (bool) ($ast->flags & ast\flags\MODIFIER_ABSTRACT),
+								 (bool) ($ast->flags & ast\flags\MODIFIER_FINAL),
+								 false, //this is $readonly,
+								 getName($ast->children['extends'])
+								 );
+	
+		foreach($ast->children['stmts']->children as $cm) {
+			switch ($cm->kind) {
+				case ast\AST_METHOD:
+					$this->toPdffMethod($cm, $theClass);
+					break;
+	
+				case ast\AST_PROP_GROUP:
+					foreach($cm->children['props']->children as $property) {
+						$this->toPdffProperty($property, $theClass, $cm->flags, $cm->children['type']);
+					}
+					break;
+	
+				case ast\AST_CLASS_CONST_GROUP:
+					foreach($cm->children['const']->children as $const) {
+						$this->toPdffClassConst($const, $theClass, $cm->flags, $ast->children['attributes']);
+					}
+					break;
+	
+				case ast\AST_USE_TRAIT:
+					foreach($cm->children['traits']->children as $usetrait) {
+						$this->toPdffUseTrait($usetrait, $theClass);
+					}
+					break;
+	
+				default:
+					print "New structure in Class : ".ast\get_kind_name($cm->kind);
+					break;
+					
+			}
+		}
+								 
+		$this->addImplements ($theClass, $ast->children['implements']->children ?? array());
+		$this->addDoccomments($theClass, $ast->children['docComment']);
+		$this->addAttributes ($theClass, $ast->children['attributes']);
+	
+		$pdff->addClass($ast->children['name'], $theClass);
+	}
+
+	private function addTypes($theClass, $types) {
+		
+		if (empty($types)) {
+			return;
+		}
+	
+		foreach($types as $type) {
+			if ($type->kind === ast\AST_NAME) {
+				switch($type->flags) {
+					// @todo : handle parents, selft, static.
+					case ast\flags\NAME_FQ: 
+						$theType = new PdffTypehint('\\'.$type->children['name']);
+						break;
+	
+					case ast\flags\TYPE_STATIC: 
+						$theType = new PdffTypehint('\\static');
+						break;
+	
+					case ast\flags\NAME_NOT_FQ: 
+						if (in_array(mb_strtolower($type->children['name']), array('parent', 'self'), true)) {
+							$theType = new PdffTypehint('\\'.mb_strtolower($type->children['name']));
+	
+							break;
+						}
+
+						if (isset($this->uses[$type->children['name']])) {
+							$theType = new PdffTypehint('\\'.$this->uses[$type->children['name']]);
+	
+							break;
+						}
+
+						$version = $this->pdff->getVersion();
+						$ns = $version->getNamespace();
+						
+						$theType = new PdffTypehint($ns->getName().'\\'.$type->children['name']);
+						break;
+						
+					case ast\flags\NAME_RELATIVE: 
+						// @todo
+	
+					default:
+						assert(false, "No a supported flag for types\n");
+				}
+			} elseif (isset(\TYPES[$type->flags])) {
+				$theType = new PdffTypehint(\TYPES[$type->flags]);
+			} else {
+				assert(false, "No such type as ".$type->children['name']." ({$type->kind}, ".ast\get_kind_name($type->kind).") ");
+			}
+		
+			$theClass->addTypehint($theType);
 		}
 	}
-							 
-	addImplements ($theClass, $ast->children['implements']->children ?? array());
-	addDoccomments($theClass, $ast->children['docComment']);
-	addAttributes ($theClass, $ast->children['attributes']);
 
-	$pdff->addClass($ast->children['name'], $theClass);
-}
-
-function toPdffConst($ast, $pdff) {
-	foreach($ast->children as $const) {
-    	$theConstant = new PdffConstant($const->children['name'],
-        	                            (string) $const->children['value'],
-            	                        false
-                	                    );    
-
-		addDoccomments($theConstant, $const->children['docComment']);
-
-	    $pdff->addConstant($const->children['name'], $theConstant);
-	}
-}
-
-function toPdffFunction($ast, $pdff) {
-	$version = $pdff->getVersion();
-	$ns = $version->getNamespace();
-
-    $theFunction = new PdffFunction($ast->children['name'],
-    								is_array($ast->children['returnType']) ? 'or' : 'one', // array => union, sinon simple
-        	                        (bool) ($ast->flags & ast\flags\FUNC_RETURNS_REF)
-            	                    );    
-
-	addDoccomments($theFunction, $ast->children['docComment']);
-
-	if ($ast->children['returnType'] !== null) {
-		addTypes($theFunction, isset($ast->children['returnType']->children[0]) ? $ast->children['returnType']->children : array($ast->children['returnType']));
-	}
-
-    addParameters($ast->children['params'], $theFunction);
-
-	$ns->addFunction($ast->children['name'], $theFunction);
-}
-
-function toPdffInterface($ast, $pdff) {
-	$version = $pdff->getVersion();
-	$ns = $version->getNamespace();
+	private function toPdffMethod($ast, $pdff) {
+		$theMethod = new PdffMethod($ast->children['name'],
+		                            $this->getVisibility($ast->flags),
+		                            (bool) ($ast->flags & ast\flags\MODIFIER_PROTECTED),
+		                            (bool) ($ast->flags & ast\flags\MODIFIER_STATIC),
+		                            (bool) ($ast->flags & ast\flags\RETURNS_REF),
+		                            $this->getTypehintType($ast->children['returnType']),
+		                            );
 	
-	$theInterface = new PdffInterface($ast->children['name'],
+		$this->addDoccomments($theMethod, $ast->children['docComment']);
+		$this->addParameters($theMethod,  $ast->children['params']);
+		if ($ast->children['returnType'] !== null) {
+			$this->addTypes($theMethod, isset($ast->children['returnType']->children[0]) ? $ast->children['returnType']->children : array($ast->children['returnType']));
+		}
+		
+		$pdff->addMethod($ast->children['name'], $theMethod);
+	}
+
+	private function toPdffInterface($ast, $pdff) {
+		$version = $pdff->getVersion();
+		$ns = $version->getNamespace();
+		
+		$theInterface = new PdffInterface($ast->children['name'],
+										  getName($ast->children['extends'])
+										  );
+	
+		$ns->addInterface($ast->children['name'], $theInterface);
+	
+		foreach($ast->children['stmts']->children as $cm) {
+			switch ($cm->kind) {
+				case ast\AST_METHOD:
+					$this->toPdffMethod($cm, $theInterface);
+					break;
+	
+				case ast\AST_CLASS_CONST_GROUP:
+					foreach($cm->children['const']->children as $const) {
+						$this->toPdffClassConst($const, $theInterface, $cm->flags, $cm->children['attributes']);
+					}
+					break;
+	
+				default:
+					print "New structure in CITE : ".ast\get_kind_name($cm->kind);
+					break;
+					
+			}
+		}									  
+	}
+
+	private function toPdffConst($ast, $pdff) {
+		foreach($ast->children as $const) {
+	    	$theConstant = new PdffConstant($const->children['name'],
+	    									$this->makeExpression($const->children['value']),
+	            	                        false
+	                	                    );    
+	
+			$this->addDoccomments($theConstant, $const->children['docComment']);
+	
+		    $pdff->addConstant($const->children['name'], $theConstant);
+		}
+	}
+	
+	private function makeExpression($ast) : string {
+		if ($ast === null) {
+			return '';
+		}
+
+		if (is_scalar($ast)) {
+			return (string) $ast;
+		}
+		
+//		print_r($ast);
+		// @todo : management of parenthesis
+		// @todo : HEREdoc are dropped 
+		
+		if (!isset($ast->kind)) {
+			var_dump($ast);
+			print "Not an object\n";
+			die();
+		}
+		
+		switch($ast->kind) {
+			case ast\AST_BINARY_OP: // addition
+				$r = array(
+					$this->makeExpression($ast->children['left']),
+					self::BINARY_OP[$ast->flags],
+					$this->makeExpression($ast->children['right']),
+				);
+				return implode(' ', $r);
+
+			case ast\AST_ARRAY_ELEM: // addition
+				$r = array();
+				if ($ast->children['key'] !== null) {
+					$r[] = $this->makeExpression($ast->children['key']);
+					$r[] = '=>';
+				}
+				$r[] = $this->makeExpression($ast->children['value']);
+				return implode(' ', $r);
+
+			case ast\AST_CLASS_CONST: // class constant
+				$r = array(
+					$this->makeExpression($ast->children['class']),
+					'::',
+					$this->makeExpression($ast->children['const'])
+				);
+				return implode('', $r);
+
+			case ast\AST_NAME: // name
+				return $ast->children['name'];
+
+			case ast\AST_MAGIC_CONST: // name
+				return	self::MAGIC_CONSTANTS[$ast->flags];
+
+			case ast\AST_CONST: // constant
+				return $ast->children['name']->children['name'];
+
+			case ast\AST_CONDITIONAL: // ternary
+				$r = array(
+					$this->makeExpression($ast->children['cond']),
+					'?',
+					$this->makeExpression($ast->children['true']),
+					':',
+					$this->makeExpression($ast->children['false']),
+				);
+				return implode(' ', $r);
+
+			case ast\AST_ARRAY: // array
+				$r = array('array(');
+				foreach($ast->children as $arg) {
+					$r[] = $this->makeExpression($arg);
+				}
+				$r[] = ')';
+				return implode(' ', $r);
+
+//			case ast\OOPS: // new
+//				print_r($ast);die();
+				
+			default:
+				print 'Unprocessed Token in expression : '. ast\get_kind_name($ast->kind).PHP_EOL;
+				print_r($ast);
+				die();
+		}
+		
+		return '';
+
+	}
+	
+	private function toPdffFunction($ast, $pdff) {	
+	    $theFunction = new PdffFunction($ast->children['name'],
+	    								is_array($ast->children['returnType']) ? 'or' : 'one', // array => union, sinon simple
+	        	                        (bool) ($ast->flags & ast\flags\FUNC_RETURNS_REF)
+	            	                    );    
+	
+		$this->addDoccomments($theFunction, $ast->children['docComment']);
+	
+		if ($ast->children['returnType'] !== null) {
+			$this->addTypes($theFunction, isset($ast->children['returnType']->children[0]) ? $ast->children['returnType']->children : array($ast->children['returnType']));
+		}
+	
+	    $this->addParameters($ast->children['params'], $theFunction);
+	
+		$pdff->addFunction($ast->children['name'], $theFunction);
+	}
+
+	private function getVisibility($flag) {
+		if ($flag & ast\flags\MODIFIER_PRIVATE) {
+			return 'private';
+		}
+	
+		if ($flag & ast\flags\MODIFIER_PROTECTED) {
+			return 'protected';
+		}
+	
+		if ($flag & ast\flags\MODIFIER_PUBLIC) {
+			return 'public';
+		}
+	
+		return 'none';
+	}
+
+	private function addDoccomments($theClass, $doccomments) {
+		if (empty($doccomments)) { return; }
+	
+		$thePhpdoc = new PdffPhpdoc($doccomments);
+	
+	    $theClass->addPhpdoc($thePhpdoc);
+	}
+	
+	private function addAttributes($theClass, $attributes) {
+		if (empty($attributes->children)) { return; }
+	
+		foreach($attributes->children as $attribute) {
+			// @todo : build the attribute with arguments and sub expressions
+			$theAttribute = new PdffAttribute(getName($attribute->children[0]->children['class']));
+	
+	    	$theClass->addAttribute($theAttribute);
+		}
+	}
+
+	private function addParameters($ast, $theFunction) {
+		if (empty($ast->children)) {
+			return;
+		}
+	
+		foreach($ast->children as $position => $param) {
+		    $theParameter = new PdffParameter($param->children['name'],
+	    	                                  $position,
+	    	                                  (bool) ($param->flags & ast\flags\PARAM_VARIADIC),
+	    	                                  (bool) ($param->flags & ast\flags\PARAM_REF),
+	    	                                  $param->children['default'] === null,  // @todo : handle variations
+	                    	               	  (string) $param->children['default'], //  $default,
+	                        	           	  false, 			// @todo : when is this an expression?
+			                                  $this->getTypehintType($param->children['type']),
+	                                	   );
+	
+		    $theFunction->addParameter($position, $theParameter);
+			if ($ast->children['returnType'] !== null) {
+				addTypes($theParameter, isset($param->children['type']->children[0]) ? $param->children['type']->children : array($param->children['type']->children));
+			}
+		}
+	}
+	
+	private function addImplements($theClass, $implements) {
+		foreach($implements as $implement) {
+			$theImplement = new PdffExtends(getName($implement));
+	
+	        $theClass->addImplements($theImplement, array()); // @todo add support for local aliases
+		}
+	}
+
+	private function getTypehintType($type) : string {
+		return is_array($type) ? 'or' : 'one';
+	}
+
+	private function toPdffClassConst($ast, $pdff, $flags, $attributes) {
+	        $theClassConstant = new PdffClassConstant($ast->children['name'],
+	                                                  $this->makeExpression($ast->children['value']),
+	                                                  false, // Not an expression
+	                                                  $this->getVisibility($flags),
+	                                                  (bool) ($flags & ast\flags\MODIFIER_FINAL),
+	                                                 );
+	
+			$this->addDoccomments($theClassConstant, $ast->children['docComment']);
+			$this->addAttributes($theClassConstant,  $attributes);
+	
+	        $pdff->addClassConstant($ast->children['name'], $theClassConstant);
+	}
+
+	private function toPdffProperty($ast, $pdff, $flags, $types) {
+	        $theProperty = new PdffProperty('$'.$ast->children['name'],
+	                                        $this->getVisibility($flags),
+                                            $this->makeExpression($ast->children['default']),
+	                                        !empty($ast->children['default']), // hasDefault
+	                                        false, // Not an expression
+	                                        (bool) ($flags & ast\flags\MODIFIER_STATIC),
+	                                        false, // readonly (bool) ($flags & ast\flags\MODIFIER_STATIC),
+	                                        $this->getTypehintType($types),
+	                                        false // var
+	                                    );
+	
+			$this->addDoccomments($theProperty, $ast->children['docComment']);
+	
+	        $pdff->addProperty('$'.$ast->children['name'], $theProperty);
+	}
+	
+	private function toPdffUseTrait($ast, $pdff) {
+	        $theUse = new PdffExtends($ast->children['name']);
+	
+	        $pdff->addUse($theUse, array());
+	}
+
+	private function toPdffTrait($ast, $pdff) {
+		$version = $pdff->getVersion();
+		$ns = $version->getNamespace();
+		
+		$theTrait = new PdffTrait($ast->children['name'],
 									  getName($ast->children['extends'])
 									  );
-
-	$ns->addInterface($ast->children['name'], $theInterface);
-
-	foreach($ast->children['stmts']->children as $cm) {
-		switch ($cm->kind) {
-			case ast\AST_METHOD:
-				toPdffMethod($cm, $theInterface);
-				break;
-
-			case ast\AST_CLASS_CONST_GROUP:
-				foreach($cm->children['const']->children as $const) {
-					toPdffClassConst($const, $theInterface, $cm->flags);
-				}
-				break;
-
-			default:
-				print "New structure in CITE : ".ast\get_kind_name($cm->kind);
-				break;
-				
-		}
-	}									  
-}
-
-function getVisibility($flag) {
-	if ($flag & ast\flags\MODIFIER_PRIVATE) {
-		return 'private';
-	}
-
-	if ($flag & ast\flags\MODIFIER_PROTECTED) {
-		return 'protected';
-	}
-
-	if ($flag & ast\flags\MODIFIER_PUBLIC) {
-		return 'public';
-	}
-
-	return 'none';
-}
-
-function getTypehintType($type) : string {
-	return is_array($type) ? 'or' : 'one';
-}
-
-function toPdffClassConst($ast, $pdff, $flags) {
-        $theClassConstant = new PdffClassConstant($ast->children['name'],
-                                                  (string) $ast->children['value'],
-                                                  false, // Not an expression
-                                                  getVisibility($flags),
-                                                  (bool) ($flags & ast\flags\MODIFIER_FINAL),
-                                                 );
-
-		addDoccomments($theClassConstant, $ast->children['docComment']);
-		addAttributes($theClassConstant,  $ast->children['attributes']);
-
-        $pdff->addClassConstant($ast->children['name'], $theClassConstant);
-}
-
-function toPdffProperty($ast, $pdff, $flags, $types) {
-        $theProperty = new PdffProperty('$'.$ast->children['name'],
-                                        getVisibility($flags),
-                                        (string) $ast->children['default'],
-                                        !empty($ast->children['default']), // hasDefault
-                                        false, // Not an expression
-                                        (bool) ($flags & ast\flags\MODIFIER_STATIC),
-                                        false, // readonly (bool) ($flags & ast\flags\MODIFIER_STATIC),
-                                        getTypehintType($types),
-                                        false // var
-                                    );
-
-		addDoccomments($theProperty, $ast->children['docComment']);
-
-        $pdff->addProperty('$'.$ast->children['name'], $theProperty);
-}
-
-function toPdffUseTrait($ast, $pdff) {
-        $theUse = new PdffExtends($ast->children['name']);
-
-        $pdff->addUse($theUse, array());
-}
-
-function toPdffMethod($ast, $pdff) {
-	$theMethod = new PdffMethod($ast->children['name'],
-	                            getVisibility($ast->flags),
-	                            (bool) ($ast->flags & ast\flags\MODIFIER_PROTECTED),
-	                            (bool) ($ast->flags & ast\flags\MODIFIER_STATIC),
-	                            (bool) ($ast->flags & ast\flags\RETURNS_REF),
-	                            getTypehintType($ast->children['returnType']),
-	                            );
-
-	addDoccomments($theMethod, $ast->children['docComment']);
-	addParameters($theMethod,  $ast->children['params']);
-	if ($ast->children['returnType'] !== null) {
-		addTypes($theMethod, isset($ast->children['returnType']->children[0]) ? $ast->children['returnType']->children : array($ast->children['returnType']));
-	}
 	
-	$pdff->addMethod($ast->children['name'], $theMethod);
-}
-
-function toPdffTrait($ast, $pdff) {
-	$version = $pdff->getVersion();
-	$ns = $version->getNamespace();
-	
-	$theTrait = new PdffTrait($ast->children['name'],
-								  getName($ast->children['extends'])
-								  );
-
-	foreach($ast->children['stmts']->children as $cm) {
-		switch ($cm->kind) {
-			case ast\AST_METHOD:
-				toPdffMethod($cm, $theTrait);
-				break;
-
-			case ast\AST_PROP_GROUP:
-				foreach($cm->children['props']->children as $property) {
-					toPdffProperty($property, $theTrait, $cm->flags, $cm->children['type']);
-				}
-				break;
-
-			default:
-				print "New structure in Trait : ".ast\get_kind_name($cm->kind);
-				break;
-				
-		}
-	}	
-
-	addDoccomments($theTrait, $ast->children['docComment']);
-
-	$ns->addTrait($ast->children['name'], $theTrait);
-}
-
-function addParameters($ast, $theFunction) {
-	if (empty($ast->children)) {
-		return;
-	}
-
-	foreach($ast->children as $position => $param) {
-	    $theParameter = new PdffParameter($param->children['name'],
-    	                                  $position,
-    	                                  (bool) ($param->flags & ast\flags\PARAM_VARIADIC),
-    	                                  (bool) ($param->flags & ast\flags\PARAM_REF),
-    	                                  $param->children['default'] === null,  // @todo : handle variations
-                    	               	  (string) $param->children['default'], //  $default,
-                        	           	  false, 			// @todo : when is this an expression?
-		                                  getTypehintType($param->children['type']),
-                                	   );
-
-	    $theFunction->addParameter($position, $theParameter);
-		if ($ast->children['returnType'] !== null) {
-			addTypes($theParameter, isset($param->children['type']->children[0]) ? $param->children['type']->children : array($param->children['type']->children));
-		}
-	}
-}
-
-function addImplements($theClass, $implements) {
-	foreach($implements as $implement) {
-		$theImplement = new PdffExtends(getName($implement));
-
-        $theClass->addImplements($theImplement, array()); // @todo add support for local aliases
-	}
-}
-
-function addTypes($theClass, $types) {
-	
-	if (empty($types)) {
-		return;
-	}
-
-	foreach($types as $type) {
-					print_r($type);
-
-		if ($type->kind === ast\AST_NAME) {
-			switch($type->flags) {
-				// @todo : handle parents, selft, static.
-				case ast\flags\NAME_FQ: 
-					$theType = new PdffTypehint($type->children['name']);
+		foreach($ast->children['stmts']->children as $cm) {
+			switch ($cm->kind) {
+				case ast\AST_METHOD:
+					toPdffMethod($cm, $theTrait);
 					break;
-
-				case ast\flags\TYPE_STATIC: 
-					$theType = new PdffTypehint('\\static');
-					break;
-
-				case ast\flags\NAME_NOT_FQ: 
-					if (in_array(mb_strtolower($type->children['name']), array('parent', 'self'), true)) {
-						$theType = new PdffTypehint('\\'.mb_strtolower($type->children['name']));
-
-						break;
+	
+				case ast\AST_PROP_GROUP:
+					foreach($cm->children['props']->children as $property) {
+						toPdffProperty($property, $theTrait, $cm->flags, $cm->children['type']);
 					}
-					global $version;
-					$ns = $version->getNamespace();
-					
-					$theType = new PdffTypehint($ns->getName().'\\'.$type->children['name']);
+					break;
+	
+				default:
+					print "New structure in Trait : ".ast\get_kind_name($cm->kind);
 					break;
 					
-				case ast\flags\NAME_RELATIVE: 
-				default:
-					assert(false, "No a supported flag for types\n");
 			}
-		} elseif (isset(\TYPES[$type->flags])) {
-			$theType = new PdffTypehint(\TYPES[$type->flags]);
-		} else {
-			assert(false, "No such type as ".$type->children['name']." ({$type->kind}, ".ast\get_kind_name($type->kind).") ");
-		}
+		}	
 	
-		$theClass->addTypehint($theType);
+		$this->addDoccomments($theTrait, $ast->children['docComment']);
+	
+		$ns->addTrait($ast->children['name'], $theTrait);
 	}
 }
 
-function addDoccomments($theClass, $doccomments) {
-	if (empty($doccomments)) { return; }
 
-	$thePhpdoc = new PdffPhpdoc($doccomments);
 
-    $theClass->addPhpdoc($thePhpdoc);
-}
-
-function addAttributes($theClass, $attributes) {
-	if (empty($attributes->children)) { return; }
-
-	foreach($attributes->children as $attribute) {
-		// @todo : build the attribute with arguments and sub expressions
-		$theAttribute = new PdffAttribute(getName($attribute->children[0]->children['class']));
-
-    	$theClass->addAttribute($theAttribute);
-	}
-}
 
 function getName($node) {
 	return $node->children['name'] ?? '';
