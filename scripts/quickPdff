@@ -49,7 +49,8 @@ $pdff = new Exakat\Reports\Helpers\Pdff();
 $version = $pdff->setVersion();
 $version->setNamespace('\\');
 
-toPdff($ast, $pdff);
+print get_class($version).PHP_EOL;
+toPdff($ast, $version);
 
 print json_encode($pdff->toArray(), JSON_PRETTY_PRINT);
 $e = hrtime(true);
@@ -57,6 +58,8 @@ $e = hrtime(true);
 print PHP_EOL.number_format(($e - $b) / 1000000, 2)." ms\n";
 
 function toPdff($ast, $pdff) {
+	$ns = $pdff->getNamespace();
+
 	switch($ast->kind) {
 		case ast\AST_STMT_LIST:
 			foreach($ast->children as $child) {
@@ -65,30 +68,33 @@ function toPdff($ast, $pdff) {
 			break;
 
 		case ast\AST_CONST_DECL:
-			toPdffConst($ast, $pdff);
+			toPdffConst($ast, $ns);
 			break;
 
 		case ast\AST_FUNC_DECL:
-			toPdffFunction($ast, $pdff);
+			toPdffFunction($ast, $ns);
 			break;
 
 		case ast\AST_CLASS:
 			switch(true) {
 				case $ast->flags & ast\flags\CLASS_INTERFACE:
-					toPdffInterface($ast, $pdff);
+					toPdffInterface($ast, $ns);
 					break;
 
 				case $ast->flags & ast\flags\CLASS_TRAIT:
-					toPdffTrait($ast, $pdff);
+					toPdffTrait($ast, $ns);
 					break;
 
 				default:
-					toPdffClass($ast, $pdff);
+					toPdffClass($ast, $ns);
 			}
 			break;
 
-		case ast\AST_DECLARE:
 		case ast\AST_NAMESPACE: // @todo
+			$ns = $pdff->setNamespace('\\'.$ast->children['name']);
+			break;
+
+		case ast\AST_DECLARE:
 			// continue;
 			break;
 			
@@ -99,9 +105,6 @@ function toPdff($ast, $pdff) {
 }
 
 function toPdffClass($ast, $pdff) {
-	$version = $pdff->getVersion();
-	$ns = $version->getNamespace();
-	
 	$theClass = new PdffClass($ast->children['name'],
 							 (bool) ($ast->flags & ast\flags\MODIFIER_ABSTRACT),
 							 (bool) ($ast->flags & ast\flags\MODIFIER_FINAL),
@@ -128,7 +131,6 @@ function toPdffClass($ast, $pdff) {
 				break;
 
 			case ast\AST_USE_TRAIT:
-//				print_r($cm);die();
 				foreach($cm->children['traits']->children as $usetrait) {
 					toPdffUseTrait($usetrait, $theClass);
 				}
@@ -145,13 +147,10 @@ function toPdffClass($ast, $pdff) {
 	addDoccomments($theClass, $ast->children['docComment']);
 	addAttributes ($theClass, $ast->children['attributes']);
 
-	$ns->addClass($ast->children['name'], $theClass);
+	$pdff->addClass($ast->children['name'], $theClass);
 }
 
 function toPdffConst($ast, $pdff) {
-	$version = $pdff->getVersion();
-	$ns = $version->getNamespace();
-	
 	foreach($ast->children as $const) {
     	$theConstant = new PdffConstant($const->children['name'],
         	                            (string) $const->children['value'],
@@ -160,7 +159,7 @@ function toPdffConst($ast, $pdff) {
 
 		addDoccomments($theConstant, $const->children['docComment']);
 
-	    $ns->addConstant($const->children['name'], $theConstant);
+	    $pdff->addConstant($const->children['name'], $theConstant);
 	}
 }
 
@@ -353,13 +352,46 @@ function addImplements($theClass, $implements) {
 }
 
 function addTypes($theClass, $types) {
+	
 	if (empty($types)) {
 		return;
 	}
 
 	foreach($types as $type) {
-		// @todo : handle case of object with classes (not \\object) : otherwise, tjey are null
-		$theType = new PdffTypehint(\TYPES[$type->flags]);
+					print_r($type);
+
+		if ($type->kind === ast\AST_NAME) {
+			switch($type->flags) {
+				// @todo : handle parents, selft, static.
+				case ast\flags\NAME_FQ: 
+					$theType = new PdffTypehint($type->children['name']);
+					break;
+
+				case ast\flags\TYPE_STATIC: 
+					$theType = new PdffTypehint('\\static');
+					break;
+
+				case ast\flags\NAME_NOT_FQ: 
+					if (in_array(mb_strtolower($type->children['name']), array('parent', 'self'), true)) {
+						$theType = new PdffTypehint('\\'.mb_strtolower($type->children['name']));
+
+						break;
+					}
+					global $version;
+					$ns = $version->getNamespace();
+					
+					$theType = new PdffTypehint($ns->getName().'\\'.$type->children['name']);
+					break;
+					
+				case ast\flags\NAME_RELATIVE: 
+				default:
+					assert(false, "No a supported flag for types\n");
+			}
+		} elseif (isset(\TYPES[$type->flags])) {
+			$theType = new PdffTypehint(\TYPES[$type->flags]);
+		} else {
+			assert(false, "No such type as ".$type->children['name']." ({$type->kind}, ".ast\get_kind_name($type->kind).") ");
+		}
 	
 		$theClass->addTypehint($theType);
 	}
