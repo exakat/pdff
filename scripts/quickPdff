@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+// @todo : support define() too
+
 use ast\flags;
 use Exakat\Reports\Helpers\Pdff;
 use Exakat\Reports\Helpers\PdffClass;
@@ -21,29 +23,13 @@ include 'scripts/Pdff.php';
 const AST_DUMP_LINENOS = 1;
 const AST_DUMP_EXCLUDE_DOC_COMMENT = 2;
 
-const TYPES = array(
-	ast\flags\TYPE_ARRAY		=> '\array',
-	ast\flags\TYPE_CALLABLE		=> '\callable',
-	ast\flags\TYPE_VOID		 	=> '\void',
-	ast\flags\TYPE_BOOL		 	=> '\bool',
-	ast\flags\TYPE_LONG			=> '\int',
-	ast\flags\TYPE_DOUBLE		=> '\float',
-	ast\flags\TYPE_STRING		=> '\string',
-	ast\flags\TYPE_ITERABLE		=> '\iterable',
-	ast\flags\TYPE_OBJECT		=> '\object',
-	ast\flags\TYPE_NULL		 	=> '\null',
-	ast\flags\TYPE_FALSE		=> '\true',
-	ast\flags\TYPE_STATIC		=> '\static',
-	ast\flags\TYPE_MIXED		=> '\mixed',
-	ast\flags\TYPE_NEVER  		=> '\never',
-);
-
-$files = shell_exec('find ../analyzeG3/projects/wordflex_flex/code/ | grep .php$');
+$files = shell_exec('find ../analyzeG3/projects/wordpress/code/ | grep .php$');
 $files = explode("\n", trim($files));
-$files = array_slice($files, 0, 123);
+//$files = array_slice($files, 0, 123);
 
 $files = array('test.php');
 
+$bt = hrtime(true);
 foreach($files as $file) {
 	$b = hrtime(true);
 	print $file.PHP_EOL;
@@ -59,9 +45,27 @@ foreach($files as $file) {
 	$e = hrtime(true);
 	print $file." : ".number_format(($e - $b) / 1000000, 2)." ms\n";
 }
+$et = hrtime(true);
+print "All : ".number_format(($et - $bt) / 1000000, 2)." ms\n";
 
 class Code {
 
+private const TYPES = array(
+	ast\flags\TYPE_ARRAY		=> '\array',
+	ast\flags\TYPE_CALLABLE		=> '\callable',
+	ast\flags\TYPE_VOID		 	=> '\void',
+	ast\flags\TYPE_BOOL		 	=> '\bool',
+	ast\flags\TYPE_LONG			=> '\int',
+	ast\flags\TYPE_DOUBLE		=> '\float',
+	ast\flags\TYPE_STRING		=> '\string',
+	ast\flags\TYPE_ITERABLE		=> '\iterable',
+	ast\flags\TYPE_OBJECT		=> '\object',
+//	ast\flags\TYPE_NULL		 	=> '\null',
+	ast\flags\TYPE_FALSE		=> '\true',
+	ast\flags\TYPE_STATIC		=> '\static',
+	ast\flags\TYPE_MIXED		=> '\mixed',
+	ast\flags\TYPE_NEVER  		=> '\never',
+);
 
 const BINARY_OP = array(
 	ast\flags\BINARY_BITWISE_OR			=> '|',
@@ -80,14 +84,22 @@ const BINARY_OP = array(
 );
 
 const MAGIC_CONSTANTS = array(
-ast\flags\MAGIC_LINE 		=> '__LINE__',
-ast\flags\MAGIC_FILE 		=> '__FILE__',
-ast\flags\MAGIC_DIR 		=> '__DIR__',
-ast\flags\MAGIC_NAMESPACE 	=> '__NAMESPACE__',
-ast\flags\MAGIC_FUNCTION	=> '__FUNCTION__',
-ast\flags\MAGIC_METHOD 		=> '__METHOD__',
-ast\flags\MAGIC_CLASS 		=> '__CLASS__',
-ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
+	ast\flags\MAGIC_LINE 		=> '__LINE__',
+	ast\flags\MAGIC_FILE 		=> '__FILE__',
+	ast\flags\MAGIC_DIR 		=> '__DIR__',
+	ast\flags\MAGIC_NAMESPACE 	=> '__NAMESPACE__',
+	ast\flags\MAGIC_FUNCTION	=> '__FUNCTION__',
+	ast\flags\MAGIC_METHOD 		=> '__METHOD__',
+	ast\flags\MAGIC_CLASS 		=> '__CLASS__',
+	ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
+);
+
+const UNARY_OP = array(
+	ast\flags\UNARY_BOOL_NOT 	=> '!',
+	ast\flags\UNARY_BITWISE_NOT => '~',
+	ast\flags\UNARY_MINUS 		=> '-',
+	ast\flags\UNARY_PLUS 		=> '+',
+	ast\flags\UNARY_SILENCE 	=> '@',
 );
 
 	private $ast;
@@ -145,7 +157,11 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 				break;
 	
 			case ast\AST_NAMESPACE: // @todo
-				$ns = $pdff->setNamespace('\\'.$ast->children['name']);
+				$ns = $pdff->setNamespace('\\'.$ast->children['name'].'\\');
+				if (is_object($ast->children['stmts'])) {
+					$this->toPdff($ast->children['stmts'], $pdff);
+				}
+//				print_r($ast);die();
 				break;
 	
 			case ast\AST_USE:
@@ -158,6 +174,21 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 			case ast\AST_INCLUDE_OR_EVAL:
 			case ast\AST_CALL;
 			case ast\AST_IF;
+			case ast\AST_ASSIGN;
+			case ast\AST_ECHO;
+			case ast\AST_GLOBAL;
+			case ast\AST_METHOD_CALL;
+			case ast\AST_STATIC_CALL;
+			case ast\AST_FOREACH;
+			case ast\AST_FOR;
+			case ast\AST_SWITCH;
+			case ast\AST_MATCH;
+			case ast\AST_UNSET;
+			case ast\AST_NEW;
+			case ast\AST_RETURN;
+			case ast\AST_EXIT;
+			case ast\AST_ASSIGN_OP;
+			case ast\AST_CONDITIONAL;
 				// continue;
 				break;
 				
@@ -173,7 +204,7 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		$theClass = new PdffClass($ast->children['name'],
 								 (bool) ($ast->flags & ast\flags\MODIFIER_ABSTRACT),
 								 (bool) ($ast->flags & ast\flags\MODIFIER_FINAL),
-								 false, //this is $readonly,
+								 false, //this is $readonly, wait for PHP 8.2
 								 getName($ast->children['extends'])
 								 );
 	
@@ -216,10 +247,29 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 	}
 
 	private function addTypes($theClass, $types) {
-		
 		if (empty($types)) {
 			return;
 		}
+
+		switch($types->kind) {
+			case ast\AST_TYPE_UNION:
+			case ast\AST_TYPE_INTERSECTION:
+				$types = $types->children;
+				break;
+				
+			case ast\AST_NULLABLE_TYPE:
+				$theType = new PdffTypehint('\\null');
+				$theClass->addTypehint($theType);
+
+				$types = $types->children;
+				break;
+
+			default:
+				$types = array($types);
+				break;
+		}	
+
+//			print_r($types);die();
 	
 		foreach($types as $type) {
 			if ($type->kind === ast\AST_NAME) {
@@ -231,6 +281,10 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 	
 					case ast\flags\TYPE_STATIC: 
 						$theType = new PdffTypehint('\\static');
+						break;
+
+					case ast\flags\TYPE_ARRAY: 
+						$theType = new PdffTypehint('\\array');
 						break;
 	
 					case ast\flags\NAME_NOT_FQ: 
@@ -249,7 +303,7 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 						$version = $this->pdff->getVersion();
 						$ns = $version->getNamespace();
 						
-						$theType = new PdffTypehint($ns->getName().'\\'.$type->children['name']);
+						$theType = new PdffTypehint($ns->getName().$type->children['name']);
 						break;
 						
 					case ast\flags\NAME_RELATIVE: 
@@ -258,8 +312,8 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 					default:
 						assert(false, "No a supported flag for types\n");
 				}
-			} elseif (isset(\TYPES[$type->flags])) {
-				$theType = new PdffTypehint(\TYPES[$type->flags]);
+			} elseif (isset(self::TYPES[$type->flags])) {
+				$theType = new PdffTypehint(self::TYPES[$type->flags]);
 			} else {
 				assert(false, "No such type as ".$type->children['name']." ({$type->kind}, ".ast\get_kind_name($type->kind).") ");
 			}
@@ -280,7 +334,7 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		$this->addDoccomments($theMethod, $ast->children['docComment']);
 		$this->addParameters($theMethod,  $ast->children['params']);
 		if ($ast->children['returnType'] !== null) {
-			$this->addTypes($theMethod, isset($ast->children['returnType']->children[0]) ? $ast->children['returnType']->children : array($ast->children['returnType']));
+			$this->addTypes($theMethod, $ast->children['returnType']);
 		}
 		
 		$pdff->addMethod($ast->children['name'], $theMethod);
@@ -349,13 +403,22 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		}
 		
 		switch($ast->kind) {
+			case ast\AST_UNARY_OP: // unaries
+				$r = array(
+					self::UNARY_OP[$ast->flags],
+					$this->makeExpression($ast->children['expr']),
+				);
+				return implode('', $r);
+
 			case ast\AST_BINARY_OP: // addition
 				$r = array(
+					is_object($ast->children['left']) ? '(' : '',
 					$this->makeExpression($ast->children['left']),
-					self::BINARY_OP[$ast->flags],
+					is_object($ast->children['left']) ? ')' : '',
+					' '.self::BINARY_OP[$ast->flags].' ',
 					$this->makeExpression($ast->children['right']),
 				);
-				return implode(' ', $r);
+				return implode('', $r);
 
 			case ast\AST_ARRAY_ELEM: // addition
 				$r = array();
@@ -468,16 +531,29 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		return '';
 	}
 	
+	private function makeTypehintType($ast) {
+		switch($ast->kind) {
+			case ast\AST_TYPE_UNION:
+				return 'or';
+				
+			case ast\AST_TYPE_INTERSECTION:
+				return 'and';
+
+			default:
+				return 'one';
+		}
+	}
+
 	private function toPdffFunction($ast, $pdff) {	
 	    $theFunction = new PdffFunction($ast->children['name'],
-	    								is_array($ast->children['returnType']) ? 'or' : 'one', // array => union, sinon simple
+	    								$this->makeTypehintType($ast->children['returnType']),
 	        	                        (bool) ($ast->flags & ast\flags\FUNC_RETURNS_REF)
 	            	                    );    
 	
 		$this->addDoccomments($theFunction, $ast->children['docComment']);
 	
 		if ($ast->children['returnType'] !== null) {
-			$this->addTypes($theFunction, isset($ast->children['returnType']->children[0]) ? $ast->children['returnType']->children : array($ast->children['returnType']));
+			$this->addTypes($theFunction, $ast->children['returnType']);
 		}
 	
 	    $this->addParameters($ast->children['params'], $theFunction);
@@ -532,15 +608,15 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 	    	                                  (bool) ($param->flags & ast\flags\PARAM_VARIADIC),
 	    	                                  (bool) ($param->flags & ast\flags\PARAM_REF),
 	    	                                  $param->children['default'] === null,  // @todo : handle variations
-	                    	               	  (string) $param->children['default'], //  $default,
-	                        	           	  false, 			// @todo : when is this an expression?
+	                    	               	  $this->makeExpression($param->children['default']), //  $default,
+	                        	           	  is_object($param->children['default']), 			// when is this an expression?
 			                                  $this->getTypehintType($param->children['type']),
 	                                	   );
-	
-		    $theFunction->addParameter($position, $theParameter);
-			if ($ast->children['returnType'] !== null) {
-				addTypes($theParameter, isset($param->children['type']->children[0]) ? $param->children['type']->children : array($param->children['type']->children));
+			if ($param->children['type'] !== null) {
+				$this->addTypes($theParameter, $param->children['type']);
 			}
+
+		    $theFunction->addParameter($position, $theParameter);
 		}
 	}
 	
@@ -575,9 +651,9 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 	                                        $this->getVisibility($flags),
                                             $this->makeExpression($ast->children['default']),
 	                                        !empty($ast->children['default']), // hasDefault
-	                                        false, // Not an expression
+	                                        is_object($ast->children['default']),  // an expression or not
 	                                        (bool) ($flags & ast\flags\MODIFIER_STATIC),
-	                                        false, // readonly (bool) ($flags & ast\flags\MODIFIER_STATIC),
+	                                        (bool) ($flags & ast\flags\MODIFIER_READONLY),
 	                                        $this->getTypehintType($types),
 	                                        false // var
 	                                    );
