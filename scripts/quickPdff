@@ -191,7 +191,7 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 	
 				case ast\AST_CLASS_CONST_GROUP:
 					foreach($cm->children['const']->children as $const) {
-						$this->toPdffClassConst($const, $theClass, $cm->flags, $ast->children['attributes']);
+						$this->toPdffClassConst($const, $theClass, $cm->flags, $cm->children['attributes']);
 					}
 					break;
 	
@@ -320,7 +320,7 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		foreach($ast->children as $const) {
 	    	$theConstant = new PdffConstant($const->children['name'],
 	    									$this->makeExpression($const->children['value']),
-	            	                        false
+	            	                        is_object($const->children['value'])
 	                	                    );    
 	
 			$this->addDoccomments($theConstant, $const->children['docComment']);
@@ -401,6 +401,22 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 				$r[] = ')';
 				return implode(' ', $r);
 
+			case ast\AST_NEW: // new
+				$r = array('new ',
+						   $ast->children['class']->children['name'],
+						  );
+				if (!empty($ast->children['args']->children)) {
+					$r[] = '(';
+					foreach($ast->children['args']->children as $arg) {
+						$r[] = $this->makeAttribute($arg);
+						$r[] = ', ';
+					}
+					array_pop($r);
+					$r[] = ')';
+
+				}
+				return implode('', $r);
+
 //			case ast\OOPS: // new
 //				print_r($ast);die();
 				
@@ -412,6 +428,44 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		
 		return '';
 
+	}
+	
+	private function makeAttribute($ast) : string {
+		switch($ast->kind) {
+			case ast\AST_ATTRIBUTE: // attribute
+				$r = array(
+					$ast->children['class']->children['name'],
+				);
+				if (!empty($ast->children['args']->children)) {
+					$r[] = '(';
+					foreach($ast->children['args']->children as $arg) {
+						$r[] = $this->makeExpression($arg);
+						$r[] = ', ';
+					}
+					array_pop($r);
+					$r[] = ')';
+
+				}
+				return implode('', $r);
+		
+			// offload every expression to makeExpression
+			case ast\AST_CONST: // constant
+			case ast\AST_MAGIC_CONST: // name
+			case ast\AST_BINARY_OP: // name
+			case ast\AST_NEW: // new
+			case ast\AST_CLASS_CONST: // new
+				return $this->makeExpression($ast);
+		
+//			case ast\OOPS: // new
+//				print_r($ast);die();
+				
+			default:
+				print 'Unprocessed Token in attribute : '. ast\get_kind_name($ast->kind).PHP_EOL;
+				print_r($ast);
+				die();
+		}
+		
+		return '';
 	}
 	
 	private function toPdffFunction($ast, $pdff) {	
@@ -459,10 +513,11 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 		if (empty($attributes->children)) { return; }
 	
 		foreach($attributes->children as $attribute) {
-			// @todo : build the attribute with arguments and sub expressions
-			$theAttribute = new PdffAttribute(getName($attribute->children[0]->children['class']));
+			foreach($attribute->children as $a) {
+				$theAttribute = new PdffAttribute($this->makeAttribute($a));
 	
-	    	$theClass->addAttribute($theAttribute);
+		    	$theClass->addAttribute($theAttribute);	
+			}
 		}
 	}
 
@@ -504,7 +559,7 @@ ast\flags\MAGIC_TRAIT 		=> '__TRAIT__',
 	private function toPdffClassConst($ast, $pdff, $flags, $attributes) {
 	        $theClassConstant = new PdffClassConstant($ast->children['name'],
 	                                                  $this->makeExpression($ast->children['value']),
-	                                                  false, // Not an expression
+		  	            	                          is_object($ast->children['value']),
 	                                                  $this->getVisibility($flags),
 	                                                  (bool) ($flags & ast\flags\MODIFIER_FINAL),
 	                                                 );
