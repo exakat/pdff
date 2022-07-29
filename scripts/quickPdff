@@ -23,27 +23,35 @@ include 'scripts/Pdff.php';
 const AST_DUMP_LINENOS = 1;
 const AST_DUMP_EXCLUDE_DOC_COMMENT = 2;
 
-$files = shell_exec('find ../analyzeG3/projects/wordpress/code/ | grep .php$');
+$files = shell_exec('find ../analyzeG3/projects/drupal/code/ | grep .php$');
 $files = explode("\n", trim($files));
 //$files = array_slice($files, 0, 123);
 
-$files = array('test.php');
+//$files = array('test.php');
 
 $bt = hrtime(true);
-foreach($files as $file) {
+foreach($files as $id => $file) {
 	$b = hrtime(true);
-	print $file.PHP_EOL;
+	print "$id) $file".PHP_EOL;
+	if (is_dir($file)) {
+		continue;
+	}
 	$code = file_get_contents($file);
 
-	$ast = ast\parse_code($code, $version=90);
+	try {
+		$ast = ast\parse_code($code, $version=90);
+	} catch (ParseError $e) {
+		print "Parse Error with $file\n";
+		continue;
+	}
 	
 	$code = new Code($ast);
 	$pdff = $code->toPdff();
 
-	print json_encode($pdff->toArray(), JSON_PRETTY_PRINT);
+//	print json_encode($pdff->toArray(), JSON_PRETTY_PRINT);
 
 	$e = hrtime(true);
-	print $file." : ".number_format(($e - $b) / 1000000, 2)." ms\n";
+//	print $file." : ".number_format(($e - $b) / 1000000, 2)." ms\n";
 }
 $et = hrtime(true);
 print "All : ".number_format(($et - $bt) / 1000000, 2)." ms\n";
@@ -60,7 +68,7 @@ private const TYPES = array(
 	ast\flags\TYPE_STRING		=> '\string',
 	ast\flags\TYPE_ITERABLE		=> '\iterable',
 	ast\flags\TYPE_OBJECT		=> '\object',
-//	ast\flags\TYPE_NULL		 	=> '\null',
+	ast\flags\TYPE_NULL		 	=> '\null',
 	ast\flags\TYPE_FALSE		=> '\true',
 	ast\flags\TYPE_STATIC		=> '\static',
 	ast\flags\TYPE_MIXED		=> '\mixed',
@@ -125,10 +133,11 @@ const UNARY_OP = array(
 		}
 
 		$ns = $pdff->getNamespace();
-	
+
 		switch($ast->kind) {
 			case ast\AST_STMT_LIST:
 				foreach($ast->children as $child) {
+					if (is_scalar($child)) { continue; }
 					$this->toPdff($child, $pdff);
 				}
 				break;
@@ -161,7 +170,6 @@ const UNARY_OP = array(
 				if (is_object($ast->children['stmts'])) {
 					$this->toPdff($ast->children['stmts'], $pdff);
 				}
-//				print_r($ast);die();
 				break;
 	
 			case ast\AST_USE:
@@ -176,19 +184,67 @@ const UNARY_OP = array(
 			case ast\AST_IF;
 			case ast\AST_ASSIGN;
 			case ast\AST_ECHO;
+			case ast\AST_PRINT;
+			case ast\AST_TRY;
+			case ast\AST_THROW;
 			case ast\AST_GLOBAL;
+			case ast\AST_STATIC;
 			case ast\AST_METHOD_CALL;
 			case ast\AST_STATIC_CALL;
 			case ast\AST_FOREACH;
 			case ast\AST_FOR;
 			case ast\AST_SWITCH;
 			case ast\AST_MATCH;
+			case ast\AST_DO_WHILE;
+			case ast\AST_WHILE;
 			case ast\AST_UNSET;
+			case ast\AST_ISSET;
+			case ast\AST_EMPTY;
+
 			case ast\AST_NEW;
+			case ast\AST_CLONE;
+			case ast\AST_CAST;
+
 			case ast\AST_RETURN;
 			case ast\AST_EXIT;
 			case ast\AST_ASSIGN_OP;
+			case ast\AST_ASSIGN_REF;
 			case ast\AST_CONDITIONAL;
+			case ast\AST_UNARY_OP;
+			case ast\AST_BINARY_OP;
+			case ast\AST_VAR;
+			case ast\AST_SHELL_EXEC;
+			case ast\AST_GOTO;
+			case ast\AST_LABEL;
+
+			case ast\AST_STATIC_PROP;
+			case ast\AST_NULLSAFE_PROP;
+			case ast\AST_NULLSAFE_METHOD_CALL;
+			case ast\AST_PROP;
+			case ast\AST_CLASS_NAME;
+			case ast\AST_INSTANCEOF;
+			case ast\AST_HALT_COMPILER;
+			case ast\AST_MAGIC_CONST;
+
+			case ast\AST_BREAK;
+			case ast\AST_CONTINUE;
+
+			case ast\AST_CLOSURE;
+			case ast\AST_ARROW_FUNC;
+
+			case ast\AST_PRE_INC;
+			case ast\AST_PRE_DEC;
+			case ast\AST_POST_INC;
+			case ast\AST_POST_DEC;
+			case ast\AST_CLASS_CONST;
+
+			case ast\AST_GROUP_USE;
+			case ast\AST_ENCAPS_LIST;
+
+			case ast\AST_CONST;
+			case ast\AST_DIM;
+
+			case ast\AST_ARRAY;
 				// continue;
 				break;
 				
@@ -205,7 +261,7 @@ const UNARY_OP = array(
 								 (bool) ($ast->flags & ast\flags\MODIFIER_ABSTRACT),
 								 (bool) ($ast->flags & ast\flags\MODIFIER_FINAL),
 								 false, //this is $readonly, wait for PHP 8.2
-								 getName($ast->children['extends'])
+								 $this->getName($ast->children['extends'])
 								 );
 	
 		foreach($ast->children['stmts']->children as $cm) {
@@ -269,8 +325,6 @@ const UNARY_OP = array(
 				break;
 		}	
 
-//			print_r($types);die();
-	
 		foreach($types as $type) {
 			if ($type->kind === ast\AST_NAME) {
 				switch($type->flags) {
@@ -307,10 +361,11 @@ const UNARY_OP = array(
 						break;
 						
 					case ast\flags\NAME_RELATIVE: 
-						// @todo
+						$theType = new PdffTypehint('\\'.$type->children['name']);
+						break;
 	
 					default:
-						assert(false, "No a supported flag for types\n");
+						assert(false, "No a supported flag for types : {$type->flags}\n");
 				}
 			} elseif (isset(self::TYPES[$type->flags])) {
 				$theType = new PdffTypehint(self::TYPES[$type->flags]);
@@ -341,14 +396,11 @@ const UNARY_OP = array(
 	}
 
 	private function toPdffInterface($ast, $pdff) {
-		$version = $pdff->getVersion();
-		$ns = $version->getNamespace();
-		
 		$theInterface = new PdffInterface($ast->children['name'],
-										  getName($ast->children['extends'])
+										  $this->getName($ast->children['extends'])
 										  );
 	
-		$ns->addInterface($ast->children['name'], $theInterface);
+		$pdff->addInterface($ast->children['name'], $theInterface);
 	
 		foreach($ast->children['stmts']->children as $cm) {
 			switch ($cm->kind) {
@@ -392,8 +444,6 @@ const UNARY_OP = array(
 			return (string) $ast;
 		}
 		
-//		print_r($ast);
-		// @todo : management of parenthesis
 		// @todo : HEREdoc are dropped 
 		
 		if (!isset($ast->kind)) {
@@ -437,8 +487,19 @@ const UNARY_OP = array(
 				);
 				return implode('', $r);
 
+			case ast\AST_NAMED_ARG: // named argument
+				$r = array(
+					$this->makeExpression($ast->children['name']),
+					': ',
+					$this->makeExpression($ast->children['expr'])
+				);
+				return implode('', $r);
+
 			case ast\AST_NAME: // name
 				return $ast->children['name'];
+
+			case ast\AST_CLASS_NAME: // name
+				return $this->makeExpression($ast->children['class']) . '::class';
 
 			case ast\AST_MAGIC_CONST: // name
 				return	self::MAGIC_CONSTANTS[$ast->flags];
@@ -532,6 +593,10 @@ const UNARY_OP = array(
 	}
 	
 	private function makeTypehintType($ast) {
+		if ($ast === null) {
+			return 'one';
+		}
+
 		switch($ast->kind) {
 			case ast\AST_TYPE_UNION:
 				return 'or';
@@ -622,7 +687,7 @@ const UNARY_OP = array(
 	
 	private function addImplements($theClass, $implements) {
 		foreach($implements as $implement) {
-			$theImplement = new PdffExtends(getName($implement));
+			$theImplement = new PdffExtends($this->getName($implement));
 	
 	        $theClass->addImplements($theImplement, array()); // @todo add support for local aliases
 		}
@@ -670,22 +735,19 @@ const UNARY_OP = array(
 	}
 
 	private function toPdffTrait($ast, $pdff) {
-		$version = $pdff->getVersion();
-		$ns = $version->getNamespace();
-		
 		$theTrait = new PdffTrait($ast->children['name'],
-									  getName($ast->children['extends'])
-									  );
+								  $this->getName($ast->children['extends'])
+								  );
 	
 		foreach($ast->children['stmts']->children as $cm) {
 			switch ($cm->kind) {
 				case ast\AST_METHOD:
-					toPdffMethod($cm, $theTrait);
+					$this->toPdffMethod($cm, $theTrait);
 					break;
 	
 				case ast\AST_PROP_GROUP:
 					foreach($cm->children['props']->children as $property) {
-						toPdffProperty($property, $theTrait, $cm->flags, $cm->children['type']);
+						$this->toPdffProperty($property, $theTrait, $cm->flags, $cm->children['type']);
 					}
 					break;
 	
@@ -698,91 +760,13 @@ const UNARY_OP = array(
 	
 		$this->addDoccomments($theTrait, $ast->children['docComment']);
 	
-		$ns->addTrait($ast->children['name'], $theTrait);
+		$pdff->addTrait($ast->children['name'], $theTrait);
+	}
+
+	function getName($node) {
+		return $node->children['name'] ?? '';
 	}
 }
 
-
-
-
-function getName($node) {
-	return $node->children['name'] ?? '';
-}
-
-function get_flag_info() : array {
-    static $info;
-    if ($info !== null) {
-        return $info;
-    }
-
-    foreach (ast\get_metadata() as $data) {
-        if (empty($data->flags)) {
-            continue;
-        }
-
-        $flagMap = [];
-        foreach ($data->flags as $fullName) {
-            $shortName = substr($fullName, strrpos($fullName, '\\') + 1);
-            $flagMap[constant($fullName)] = $shortName;
-        }
-
-        $info[(int) $data->flagsCombinable][$data->kind] = $flagMap;
-    }
-
-    return $info;
-}
-
-function format_flags(int $kind, int $flags) : string {
-    list($exclusive, $combinable) = get_flag_info();
-    if (isset($exclusive[$kind])) {
-        $flagInfo = $exclusive[$kind];
-        if (isset($flagInfo[$flags])) {
-            return "{$flagInfo[$flags]} ($flags)";
-        }
-    } else if (isset($combinable[$kind])) {
-        $flagInfo = $combinable[$kind];
-        $names = [];
-        foreach ($flagInfo as $flag => $name) {
-            if ($flags & $flag) {
-                $names[] = $name;
-            }
-        }
-        if (!empty($names)) {
-            return implode(" | ", $names) . " ($flags)";
-        }
-    }
-    return (string) $flags;
-}
-
-/** Dumps abstract syntax tree */
-function ast_dump($ast, int $options = 0) : string {
-    if ($ast instanceof ast\Node) {
-        $result = ast\get_kind_name($ast->kind);
-
-        if ($options & AST_DUMP_LINENOS) {
-            $result .= " @ $ast->lineno";
-            if (isset($ast->endLineno)) {
-                $result .= "-$ast->endLineno";
-            }
-        }
-
-        if (ast\kind_uses_flags($ast->kind) || $ast->flags != 0) {
-            $result .= "\n    flags: " . format_flags($ast->kind, $ast->flags);
-        }
-        foreach ($ast->children as $i => $child) {
-            if (($options & AST_DUMP_EXCLUDE_DOC_COMMENT) && $i === 'docComment') {
-                continue;
-            }
-            $result .= "\n    $i: " . str_replace("\n", "\n    ", ast_dump($child, $options));
-        }
-        return $result;
-    } else if ($ast === null) {
-        return 'null';
-    } else if (is_string($ast)) {
-        return "\"$ast\"";
-    } else {
-        return (string) $ast;
-    }
-}
 
 ?>
