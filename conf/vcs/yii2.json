@@ -4,7 +4,7 @@
     "name": "Yii",
     "versions": {
         "3.0": "3.0.0-alpha1",
-        "2.0": "2.0.45"
+        "2.0": "2.0.46"
     },
     "ignored_dirs": [],
     "ignored_versions": [],
