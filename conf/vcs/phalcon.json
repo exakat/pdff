@@ -1,0 +1,12 @@
+{
+    "handle": "https://github.com/phalcon/phalcon.git",
+    "vcs": "git",
+    "name": "phalcon",
+    "versions": {
+        "6.0": "v6.0.x",
+        "5.0": "v5.0.x"
+    },
+    "ignored_dirs": [],
+    "ignored_versions": [],
+    "tags": []
+}
