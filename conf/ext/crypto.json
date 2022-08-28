@@ -1,0 +1,9 @@
+{
+"name":"crypto",
+"prerequisite":["libssl-dev"],
+"pecl": "crypto",
+"peclVersion": "0.3.2",
+"homepage":"https://github.com/bukka/php-crypto",
+"error":"",
+"phpVersion":""
+}

@@ -1,0 +1,9 @@
+{
+"name":"fann",
+"prerequisite":["libfann-dev"],
+"pecl": "fann",
+"peclVersion":"",
+"homepage":"https://github.com/bukka/php-fann",
+"error":"",
+"phpVersion":""
+}

@@ -1,0 +1,6 @@
+{
+"name":"recode",
+"prerequisite":[],
+"pecl": "recode",
+"homepage":"https://github.com/phpredis/phpredis/"
+}

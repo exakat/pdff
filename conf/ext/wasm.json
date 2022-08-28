@@ -1,0 +1,7 @@
+{
+"name":"wasm",
+"prerequisite":[],
+"pecl": "wasm",
+"homepage":"https://github.com/wasmerio/wasmer-php",
+"error":"libtool: unrecognized option `-I.'"
+}

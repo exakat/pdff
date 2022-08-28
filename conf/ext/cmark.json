@@ -1,0 +1,7 @@
+{
+"name":"cmark",
+"prerequisite":["libcmark-dev"],
+"pecl": "cmark",
+"homepage":"https://github.com/krakjoe/cmark",
+"error":""
+}

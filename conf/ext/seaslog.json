@@ -1,0 +1,6 @@
+{
+"name":"seaslog",
+"prerequisite":[],
+"pecl": "seaslog",
+"homepage":"https://github.com/SeasX/SeasLog"
+}

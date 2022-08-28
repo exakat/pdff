@@ -1,0 +1,9 @@
+{
+"name":"db2",
+"prerequisite":["sqlcli-devel","gcc","make-gnu"],
+"pecl": "ibm_db2",
+"peclVersion": "",
+"homepage":"https://github.com/php/pecl-database-ibm_db2",
+"error":"checking Looking for DB2 CLI libraries... not found",
+"phpVersion":""
+}

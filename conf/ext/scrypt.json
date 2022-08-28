@@ -1,0 +1,8 @@
+{
+"name":"scrypt",
+"prerequisite":[],
+"pecl": "scrypt",
+"homepage":"https://github.com/DomBlack/php-scrypt",
+"error":"",
+"phpVersion":""
+}

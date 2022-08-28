@@ -1,0 +1,9 @@
+{
+"name":"ev",
+"prerequisite":[],
+"pecl": "ev",
+"peclVersion":"",
+"homepage":"https://bitbucket.org/osmanov/pecl-ev/src/master/",
+"error":"",
+"phpVersion":""
+}

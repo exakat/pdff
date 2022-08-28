@@ -1,0 +1,7 @@
+{
+"name":"gmagick",
+"prerequisite":["libgraphicsmagick1-dev"],
+"pecl": "gmagick",
+"homepage":"https://github.com/vitoc/gmagick",
+"peclVersion": "2.0.6RC1"
+}

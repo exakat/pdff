@@ -1,0 +1,6 @@
+{
+"name":"memcache",
+"prerequisite":[],
+"pecl": "memcache",
+"homepage":"https://github.com/websupport-sk/pecl-memcache"
+}

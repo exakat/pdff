@@ -1,0 +1,9 @@
+{
+"name":"dio",
+"prerequisite":[],
+"pecl": "dio",
+"homepage":"https://github.com/php/pecl-system-dio.git",
+"error":"",
+"phpVersion":"",
+"peclVersion":"0.2.1"
+}

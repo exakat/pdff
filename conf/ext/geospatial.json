@@ -1,0 +1,8 @@
+{
+"name":"geospatial",
+"prerequisite":[],
+"pecl": "geospatial",
+"peclVersion": "0.3.2",
+"homepage":"https://github.com/php-geospatial/geospatial",
+"error":""
+}
