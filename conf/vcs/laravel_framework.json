@@ -1,0 +1,15 @@
+{
+    "handle": "https:\/\/github.com\/laravel\/framework.git",
+    "vcs": "git",
+    "name": "laravel_framework",
+    "versions": {
+        "9.34": "v9.34.0",
+        "9.33": "v9.33.0",
+        "9.32": "v9.32.0",
+        "9.31": "v9.31.0",
+        "9.30": "v9.3.1"
+    },
+    "ignored_dirs": [],
+    "ignored_versions": [],
+    "tags": []
+}
